@@ -1,5 +1,5 @@
 <?php 
-include_once "php/commun.php";
+include "php/commun.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,10 @@ include_once "php/commun.php";
 <?php menu(); ?>
 
 <center>
-<div class="container"></div>
+<div class="container">
+	
+	
+</div>
 
 </center>
 </body>
