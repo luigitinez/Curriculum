@@ -6,9 +6,16 @@ include 'php/commun.php';
 <head>
 	<title>Registro</title>
 	<?php styles(); ?>
+	<link rel="stylesheet" type="text/css" href="css/style-reg.css">
 </head>
 <body>
-<?php menu(); ?>
+<?php menu(); 
+
+/*echo $_SERVER['HTTP_HOST'];
+echo "<br>";
+echo $_SERVER['PHP_SELF'];*/
+?>
+
 <div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
@@ -18,8 +25,8 @@ include 'php/commun.php';
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="name" id="name"  placeholder="Escriba su nombre"/>
 								</div>
 							</div>
 						</div>
@@ -28,8 +35,8 @@ include 'php/commun.php';
 							<label for="email" class="cols-sm-2 control-label">Correo</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Introduzca su correo"/>
 								</div>
 							</div>
 						</div>
@@ -38,7 +45,7 @@ include 'php/commun.php';
 							<label for="username" class="cols-sm-2 control-label">Nick</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
 									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
 								</div>
 							</div>
@@ -48,8 +55,8 @@ include 'php/commun.php';
 							<label for="password" class="cols-sm-2 control-label">Contraseña</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Introduzca una Contraseña"/>
 								</div>
 							</div>
 						</div>
@@ -58,8 +65,8 @@ include 'php/commun.php';
 							<label for="confirm" class="cols-sm-2 control-label">Confirmar Contraseña</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirmar Contraseña"/>
 								</div>
 							</div>
 						</div>
