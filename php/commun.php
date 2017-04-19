@@ -1,5 +1,6 @@
 <?php
-
+include "functions.php";
+include_once 'php/functions.php';
 function menu(){
 ?>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -12,16 +13,31 @@ function menu(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Curriculum</a>
+
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+<?php
+  //index.php or controller
+  $pages = array("index.php"=>"HOME","reg.php"=>"Registro","contact.php"=>"Contactenos");
+  $activePage = geturl();
+  echo $activePage;
+?>
+
+
+     <!--Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Home</a></li>
-        <li><a href="contact.php">Contactenos</a></li>
+      <?php //menu.php
+      foreach($pages as $url=>$title): ?>
+        <li>
+             <a <?php if($url == $activePage):?>class="active"<?php endif;?> href="<?php echo $url;?>">
+               <?php echo $title;?>
+            </a>
+        </li>
+
+      <?php endforeach;?>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mas <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
@@ -82,7 +98,6 @@ function menu(){
 }
 
 function styles(){?>
-  <link rel="stylesheet" type="text/css" href="">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
