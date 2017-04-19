@@ -20,7 +20,6 @@ function menu(){
   //index.php or controller
   $pages = array("index.php"=>"HOME","reg.php"=>"Registro","contact.php"=>"Contactenos");
   $activePage = geturl();
-  echo $activePage;
 ?>
 
 
@@ -29,8 +28,8 @@ function menu(){
       <ul class="nav navbar-nav">
       <?php //menu.php
       foreach($pages as $url=>$title): ?>
-        <li>
-             <a <?php if($url == $activePage):?>class="active"<?php endif;?> href="<?php echo $url;?>">
+        <li <?php if($url == $activePage):?>class="active"<?php endif;?> >
+             <a  href="<?php echo $url;?>">
                <?php echo $title;?>
             </a>
         </li>
