@@ -1,6 +1,5 @@
 <?php
 include "functions.php";
-include_once 'php/functions.php';
 function menu(){
 ?>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -62,7 +61,7 @@ function menu(){
         <li>
            <div class="row">
               <div class="col-md-12">
-                 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                 <form class="form" role="form" method="post" action="php/log.php" accept-charset="UTF-8" id="login-nav">
                     <div class="form-group">
                        <label class="sr-only" for="exampleInputEmail2">Email address</label>
                        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
@@ -102,6 +101,6 @@ function styles(){?>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style-one.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><?
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><?php
 }
 ?>
