@@ -5,11 +5,11 @@ include "php/commun.php";
 <html>
 <head>
 	<title>Contacto</title>
-	<?php styles();?>
 	<link rel="stylesheet" type="text/css" href="css/style-contact.css">
+	<?php styles();?>
 </head>
 <body>
-<? menu(); ?>
+<?php menu(); ?>
 <div class="container">
 
 

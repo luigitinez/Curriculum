@@ -29,7 +29,7 @@ h2 {
     margin-bottom: 35px;
 }
 
-input {
+div > input {
     font-size: 18px;
     padding: 5px 10px 10px 5px;
     display: block;
@@ -44,7 +44,7 @@ input {
     }
 
 /* LABEL ======================================= */
-label {
+span + label {
     color: #fff;
     font-size: 18px;
     font-weight: normal;
