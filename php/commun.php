@@ -61,18 +61,18 @@ function menu(){
         <li>
            <div class="row">
               <div class="col-md-12">
-                 <form class="form" role="form" method="post" action="php/log.php" accept-charset="UTF-8" id="login-nav">
+                 <form class="form" role="form" method="POST" action="php/log.php" accept-charset="UTF-8" id="login-nav">
                     <div class="form-group">
-                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                       <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                       <label class="sr-only" for="exampleInputEmail2">Correo</label>
+                       <input type="email" name="user" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
                     </div>
                     <div class="form-group">
-                       <label class="sr-only" for="exampleInputPassword2">Password</label>
-                       <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                       <label class="sr-only" for="exampleInputPassword2">Contraseña</label>
+                       <input type="password" name="pass" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
                                              <div class="help-block text-right"><a href="">¿Olvidó su contraseña?</a></div>
                     </div>
                     <div class="form-group">
-                       <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                       <input type="submit" class="btn btn-primary btn-block">
                     </div>
                     <div class="checkbox">
                        <label>
@@ -93,6 +93,23 @@ function menu(){
   </div><!-- /.container-fluid -->
 </nav>
 <?php ;
+  if(isset($_GET['login'])){
+    if($_GET['login']==="true"){
+    ?>
+      <div class="alert alert-success alert-dismissable fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Éxito!</strong> Usted inició sesión correctamente.
+      </div>
+      <?php
+      }elseif($_GET['login']==="false"){?>
+        <div class="alert alert-danger alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error!</strong> No fue posible iniciar sesión, vuelva a probar.
+        </div>
+    <?php }else {
+      
+    }
+  }
 }
 
 function styles(){?>
