@@ -98,7 +98,13 @@ function menu(){
     ?>
       <div class="alert alert-success alert-dismissable fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Éxito!</strong> Usted inició sesión correctamente.
+        <strong>Éxito!</strong>   
+        <?php 
+        if(!empty($_GET['usr'])){ 
+        echo $_GET['usr'];
+        }else{ 
+        echo "Usted";}
+        ?> inició sesión correctamente.
       </div>
       <?php
       }elseif($_GET['login']==="false"){?>
