@@ -13,7 +13,7 @@ include "php/commun.php"
 
 <center>
 <div class="container">
-
+<h1>Bienvenido a <i>Curriculum</i></h1>
 	
 </div>
 
