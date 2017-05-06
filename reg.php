@@ -9,12 +9,7 @@ include 'php/commun.php';
 	<link rel="stylesheet" type="text/css" href="css/style-reg.css">
 </head>
 <body>
-<?php menu(); 
-
-/*echo $_SERVER['HTTP_HOST'];
-echo "<br>";
-echo $_SERVER['PHP_SELF'];*/
-?>
+<?php menu(); ?>
 
 <div class="container">
 			<div class="row main">
@@ -32,21 +27,21 @@ echo $_SERVER['PHP_SELF'];*/
 						</div>
 
 						<div class="form-group">
-							<label for="email" class="cols-sm-2 control-label">Correo</label>
+							<label for="username" class="cols-sm-2 control-label">Apellido/s</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="Introduzca su correo"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="Introduzca su Apellido/s"/>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="username" class="cols-sm-2 control-label">Nick</label>
+							<label for="email" class="cols-sm-2 control-label">Correo</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+									<input type="text" class="form-control" name="email" id="email"  placeholder="Introduzca su correo"/>
 								</div>
 							</div>
 						</div>
