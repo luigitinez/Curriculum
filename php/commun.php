@@ -37,9 +37,9 @@ function menu(){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mas <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">¿Quienes Somos?</a></li>
+            <li><a href="#">Terminos y Condiciones</a></li>
+            <li><a href="#">¿Porque Curriculum?</a></li>
             <li class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li class="divider"></li>
@@ -47,12 +47,14 @@ function menu(){
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <!-- buscador >
+      <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="buscar">
         </div>
         <button type="submit" class="btn btn-default">Enviar</button>
       </form>
+      <!-- fin buscador-->
       <ul class="nav navbar-nav navbar-right">
         <li><a href="reg.php"></a></li>
         <li class="dropdown">
