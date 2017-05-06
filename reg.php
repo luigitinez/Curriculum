@@ -14,7 +14,7 @@ include 'php/commun.php';
 <div class="container">
 			<div class="row main">
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="#">
+					<form class="form-horizontal" method="post" action="php/reg.php">
 						
 						<div class="form-group">
 							<label for="name" class="cols-sm-2 control-label">Nombre</label>
@@ -67,7 +67,7 @@ include 'php/commun.php';
 						</div>
 
 						<div class="form-group ">
-							<button type="button" class="btn btn-primary btn-lg btn-block login-button">Registrese</button>
+							<input type="submit"  class="btn btn-primary btn-lg btn-block login-button"/>
 						</div>
 						
 					</form>

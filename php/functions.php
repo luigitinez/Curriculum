@@ -16,6 +16,12 @@ function turnback($params=""){
 	$params=str_replace(";","&",$params);
 	$params="?".$params;
 	}
-
-	header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
+	if(strpos($_SERVER['HTTP_REFERER'],"?")===false){
+		header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
+	
+	}else{
+		
+		$url=explode("?",$_SERVER['HTTP_REFERER']);
+		header('Location: '.$url[0].$params); 
+	}
 }
