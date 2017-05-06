@@ -39,5 +39,28 @@ class usuario{
         return $this -> surname;
     }
 
+    //SETTERS
+    function setmail($nick){
+         $this -> nick;
+    }
+    function setid($id){
+        return $this -> id;
+    }
+    function setpass($pass){
+        return $this -> pass;
+    }
+     function setprof($prof){
+        return $this -> prof;
+    }
+    function setpic($pic){
+        return $this -> pic;
+    }
+    function setname($name){
+        return $this -> name;
+    }
+     function setsurname($surname){
+        return $this -> surname;
+    }
+
 }
 ?>
