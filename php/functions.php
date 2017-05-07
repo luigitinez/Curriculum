@@ -1,5 +1,4 @@
 <?php
-
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];
@@ -18,9 +17,7 @@ function turnback($params=""){
 	}
 	if(strpos($_SERVER['HTTP_REFERER'],"?")===false){
 		header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
-	
 	}else{
-		
 		$url=explode("?",$_SERVER['HTTP_REFERER']);
 		header('Location: '.$url[0].$params); 
 	}
