@@ -119,61 +119,43 @@ function menu(){
     }
   }
 ?>
-<!--//BLOQUE COOKIES http://politicadecookies.com/ -->
-<div id="barraaceptacion" style="display: block;">
-    <div class="inner">
-        Solicitamos su permiso para obtener datos estadísticos de su navegación en esta web, en cumplimiento del Real 
-        Decreto-ley 13/2012. Si continúa navegando consideramos que acepta el uso de cookies.
-        <a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a> | 
-        <a href="cookies.php" target="_blank" class="info">Más información</a>
-    </div>
-</div>
- 
 <script>
-function getCookie(c_name){
-    var c_value = document.cookie;
-    var c_start = c_value.indexOf(" " + c_name + "=");
-    if (c_start == -1){
-        c_start = c_value.indexOf(c_name + "=");
-    }
-    if (c_start == -1){
-        c_value = null;
-    }else{
-        c_start = c_value.indexOf("=", c_start) + 1;
-        var c_end = c_value.indexOf(";", c_start);
-        if (c_end == -1){
-            c_end = c_value.length;
-        }
-        c_value = unescape(c_value.substring(c_start,c_end));
-    }
-    return c_value;
-}
- 
-function setCookie(c_name,value,exdays){
-    var exdate=new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-    document.cookie=c_name + "=" + c_value;
-}
- 
-if(getCookie('tiendaaviso')!="1"){
-    document.getElementById("barraaceptacion").style.display="block";
-}
-function PonerCookie(){
-    setCookie('tiendaaviso','1',365);
-    document.getElementById("barraaceptacion").style.display="none";
-}
+$(function() {
+checkCookie();
+});
 </script>
+
+<!--//BLOQUE COOKIES http://politicadecookies.com/ -->
+        <div id="cookie_directive_container" class="container" style="display: none">
+            <nav class="navbar navbar-default navbar-fixed-bottom">
+
+                <div class="container" style="padding-top:20px;">
+                <div class="navbar-inner navbar-content-center" id="cookie_accept">
+
+                    <a href="#" onclick="cerrar()" class="btn btn-primary pull-right">Close</a>
+                    <p class="text-muted credit">
+                      Usando nuestro sitio web usted nos consiente el uso de cookies de acuerdo con nuestra <a href="/cookies">politica de cookies</a>.
+                    </p>
+                    <br>
+
+                </div>
+              </div>
+
+            </nav>
+        </div>
 <!--//FIN BLOQUE COOKIES-->
 <?php
 }
 
-function styles(){?>
+function styles(){
+?>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/style-one.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><?php
-}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/js-cookies.js"></script>
+<?php
+  }
 ?>
