@@ -114,7 +114,16 @@ function menu(){
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Error!</strong> No fue posible iniciar sesión, vuelva a probar.
         </div>
-<?php }else {
+<?php 
+        if(isset($_GET['pass'])){
+?>
+            <div class="alert alert-danger alert-dismissable fade in">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+               <strong>Error contraseña!</strong>
+            </div>
+<?php
+        }
+      }else {
       
     }
   }
