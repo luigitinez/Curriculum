@@ -42,4 +42,17 @@ function regusr($mail,$pass,$name,$surname){
     }
 }
 
+function getusr($mail){
+    $conn = conectar();
+    $sql = "SELECT * FROM `usr`WHERE mail = `$mail`";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+    // output data of each row
+    $row = $result->fetch_assoc();
+    return $row;
+    }
+    
+}
+
 ?>

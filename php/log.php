@@ -1,13 +1,14 @@
 <?php 
 include "functions.php";
 include "MySQLDataSource.php";
+include "class/objetousuario.php";
 /*realizar comprobaciones si el usuario existe*/
 /*si el usuario no es encontrado en la bbdd devolverlo de la página que viene*/
 if (!$_POST){
   turnback("login=false");
 } else {
    $usr     =   $_POST['user'];
-   $pass    =   md5($_POST['pass']);
+   $pass    =  $_POST['pass'];
    $enlace = conectar();//mysqli_connect("127.0.0.1", "root", "", "curriculum");
 
 if (!$enlace) {
@@ -30,10 +31,22 @@ else{
       $linea =$result->fetch_assoc();
       
       if (strcmp($linea['pass'],$pass)==0){//comparas los str para saber si la contraseña esta bn
-        //coincide, la contraseña es correcta iniciar sesión
-        turnback("login=true&usr=$usr");
+        print_r($linea);
+ /*----------------------------creamos el objeto usuario y lo almacenamos en la sesion usr-----------------------------*/
+            $_SESSION['usr']=new usuario();
+            $_SESSION['usr']->setid($linea[0]);
+            $_SESSION['usr']->setmail($linea[1]);
+            $_SESSION['usr']->setpass($linea[2]);
+            //$_SESSION['usr']->setprof($usr5);
+            //$_SESSION['usr']->setpic($linea[3]);
+            $_SESSION['usr']->setname($linea[3]);
+            $_SESSION['usr']->setsurname($linea[4]);
+          
+        /*---------------------------------------------------------*/
+        //turnback("login=true;usr=$usr");
       }else{
         //ha sido todo un fracaso
+        turnback("login=false;pass=false");
       }
       
 
