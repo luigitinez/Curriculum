@@ -39,12 +39,40 @@ if(!empty($_GET['reg']) && strcasecmp($_GET['reg'],"true")==0){
 		foreach ($_SESSION['reg_error'] as $key => $value) {
 			echo $key,"<br>";
 		}
+		unset($_SESSION['reg_error']);
 ?>
 				</a>
 			</div>
 <?php
 	}
 }
+if(isset($_GET["bbdd"])){//imprimir error de bbdd
+?>
+ <div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>¡Error de conexión!</strong> No fue posible registrarle en la Base de Datos, pruebe mas tarde. Disculpe las molestias.
+  </div>
+<?php
+}
+if(isset($_GET["pass"])){//imprimir error de contraseñas no coinciden
+?>
+ <div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>¡Error en Contraseña!</strong> No fue posible registrarle porque sus contraseñas no coinciden.
+  </div>
+<?php  
+}
+if(isset($_GET["usr"])){
+?>
+ <div class="alert alert-danger alert-dismissable fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>¡Error!</strong> No fue posible registrarle, ya existe un usuario usando el correo electrónico <?php echo $_GET['usr'];?>.
+  </div>
+<?php
+}
+
+
+
 ?>
 </div>
 <div class="container">
@@ -87,7 +115,7 @@ if(!empty($_GET['reg']) && strcasecmp($_GET['reg'],"true")==0){
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="contraseña" id="password"  placeholder="Introduzca una Contraseña" required/>
+									<input type="password" class="form-control" name="contrasena" id="password"  placeholder="Introduzca una Contraseña" required/>
 								</div>
 							</div>
 						</div>
