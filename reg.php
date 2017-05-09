@@ -1,5 +1,5 @@
 <?php
-include 'php/commun.php';
+include 'php/common.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ if(isset($_GET["pass"])){//imprimir error de contraseñas no coinciden
   </div>
 <?php  
 }
-if(isset($_GET["usr"])){
+if(isset($_GET["usr"])&& isset($_GET['reg']) && strcasecmp($_GET['reg'],'false')==0){
 ?>
  <div class="alert alert-danger alert-dismissable fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

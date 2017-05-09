@@ -1,5 +1,5 @@
 <?php
-include 'php/commun.php';
+include 'php/common.php';
 ?>
 <html>
 <head>

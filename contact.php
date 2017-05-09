@@ -1,12 +1,12 @@
 <?php 
-include "php/commun.php";
+include "php/common.php";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Contacto</title>
-	<link rel="stylesheet" type="text/css" href="css/style-contact.css">
 	<?php styles();?>
+	<link rel="stylesheet" type="text/css" href="css/style-contact.css">
 </head>
 <body>
 <?php menu(); ?>
@@ -14,7 +14,7 @@ include "php/commun.php";
 
 
     <div class="col-lg-offset-4 col-lg-4" id="panel">
-        <h2>Get In Touch</h2>
+        <h2>Contacte con nosotros</h2>
 
         <form>
 
@@ -36,14 +36,14 @@ include "php/commun.php";
                 <input type="text" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Mobile No</label>
+                <label>Numero de Telefono</label>
             </div>
 
             <div class="group">
                 <input type="text" required>
                 <span class="highlight"></span>
                 <span class="bar"></span>
-                <label>Message</label>
+                <label>Mensaje</label>
             </div>
             <div class="group">
                 <center> <button type="submit" class="btn btn-warning">Send <span class="glyphicon glyphicon-send"></span></button></center>
