@@ -1,5 +1,6 @@
 <?php
-include "functions.php";
+include_once "functions.php";
+include "class/objetousuario.php";
 function menu(){
 ?>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -56,7 +57,9 @@ function menu(){
       </form>
       <!-- fin buscador-->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="reg.php"></a></li>
+<?php
+      if(usrlogged()){
+?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
       <ul id="login-dp" class="dropdown-menu">
@@ -90,6 +93,23 @@ function menu(){
         </li>
       </ul>
         </li>
+<?php } else{
+?>
+    
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $_SESSION['usr']->getname(); ?></b> <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $_SESSION['usr']->getmail(); ?></a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $_SESSION['usr']->getprof()?></a></li>
+      <li role="presentation" class="divider"></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="php/logout.php">LogOut</a></li>
+    </ul>
+  </li>
+   <a href=<?= "'".$_SESSION['usr']->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>></a> 
+<?php
+}
+?>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -101,7 +121,7 @@ function menu(){
       <div class="alert alert-success alert-dismissable fade in">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Éxito!</strong>   
-        <?php 
+        <?php //se caza el nombre de usuario si se ha podido recoger por get y se muestra un mensaje personalizado de bienvenida
         if(!empty($_GET['usr'])){ 
         echo $_GET['usr'];
         }else{ 
@@ -127,6 +147,24 @@ function menu(){
       
     }
   }
+  if(isset($_GET['logout'])){//comprobamos si se ha intentado hacer logout
+      if(strcmp($_GET['logout'],'true')==0){//exito en el logout
+?>
+        <div class="alert alert-success alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Exito!</strong> Se cerró correctamenta la sesion.
+        </div>
+<?php
+      }else{//no hubo exito en el logout
+?>
+         <div class="alert alert-danger alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Error!</strong> No fue posible iniciar sesión, vuelva a probar.
+        </div>
+<?php
+      }
+  }
+  
 ?>
 <script>
 $(function() {

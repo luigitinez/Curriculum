@@ -1,6 +1,8 @@
 <?php
+include 'php/functions.php';
 include 'php/common.php';
 session_start();
+backlogged();
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +17,8 @@ menu();
 ?>
 <div class="container">
 <?php
+
+
 if(!empty($_GET['reg']) && strcasecmp($_GET['reg'],"true")==0){
 ?>
 <div class="alert alert-success alert-dismissable fade in">
@@ -70,9 +74,6 @@ if(isset($_GET["usr"])&& isset($_GET['reg']) && strcasecmp($_GET['reg'],'false')
   </div>
 <?php
 }
-
-
-
 ?>
 </div>
 <div class="container">

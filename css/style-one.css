@@ -14,7 +14,10 @@
     color:#fff;
     z-index:99999;
 }
- 
+.img-icon{
+    height: 50px;
+    width: 50px;
+}
 .inner {
     width:100%;
     position:absolute;

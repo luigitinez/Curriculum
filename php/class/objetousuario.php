@@ -6,7 +6,7 @@
 
 class usuario{
 
-    private $mail;
+    public $mail;
     private $id;
     private $pass;
     private $prof;//se guardará la profesión real y no el id
@@ -18,7 +18,7 @@ class usuario{
     //GETTERS
 
     function getmail(){
-        return $this -> nick;
+        return $this -> mail;
     }
     function getid(){
         return $this -> id;
@@ -38,28 +38,34 @@ class usuario{
      function getsurname(){
         return $this -> surname;
     }
+    function getkarma(){
+        return $this -> karma;
+    }
 
     //SETTERS
     function setmail($nick){
-         $this -> nick;
+         $this -> mail = $nick;
     }
     function setid($id){
-        return $this -> id;
+         $this -> id = $id;
     }
     function setpass($pass){
-        return $this -> pass;
+        $this -> pass = $pass;
     }
      function setprof($prof){
-        return $this -> prof;
+        $this -> prof = $prof;
     }
     function setpic($pic){
-        return $this -> pic;
+        $this -> pic = $pic;
     }
     function setname($name){
-        return $this -> name;
+        $this -> name = $name;
     }
      function setsurname($surname){
-        return $this -> surname;
+        $this -> surname =$surname;
+    }
+    function setkarma($karma){
+        $this -> karma =$karma;
     }
 
 }

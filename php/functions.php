@@ -15,10 +15,27 @@ function turnback($params=""){
 	$params=str_replace(";","&",$params);
 	$params="?".$params;
 	}
+	$actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];//link de la pagina en la que nos encontramos ahora mismo
 	if(strpos($_SERVER['HTTP_REFERER'],"?")===false){
-		header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
+		if(strcmp($actual_link,$_SERVER['HTTP_REFERER'])==0){//si la pagina anterior es la misma que la actual (hay que replicarla al otro else por si lleva parámetros la funcion)
+			header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 
+		}else{
+			header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
+		}
 	}else{
 		$url=explode("?",$_SERVER['HTTP_REFERER']);
 		header('Location: '.$url[0].$params); 
+	}
+}
+function backlogged(){
+	if(isset($_SESSION['usr'])){
+		turnback();
+	}
+}
+function usrlogged(){
+	if(!isset($_SESSION['usr'])){
+		return true;
+	}else{
+		return false;
 	}
 }

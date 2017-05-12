@@ -14,7 +14,10 @@ function conectar(){
 function usrexists ($mail){
     $enlace= conectar();
     //generamos una consulta para enviar a la bbdd
-  $query="SELECT * FROM `usr` WHERE `mail` = '".$mail."'";
+        //    SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = 'lmgspain@hotmail.com'
+  $query = "SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
+  //$query="SELECT * FROM `usr` WHERE `mail` = '".$mail."'";
+  echo "<pre>".$query."</pre>";
   if(!$result =$enlace->query($query)){
    //la consulta no se ha realizado con exito
    $mysqli->close();
