@@ -18,8 +18,16 @@ function menu(){
 
 <?php
   //index.php or controller
-  $pages = array("index.php"=>"HOME","reg.php"=>"Registro","contact.php"=>"Contactenos");
+  //array que contiene todas las paginas que aparecen en el menu 
+  $pages = array("index.php"=>"HOME","contact.php"=>"Contactenos");
   $activePage = geturl();
+ if(isset($_SESSION['usr'])){
+   //aqui los links exclusivos del usuario logged
+ $pages['edit.php']="Editar perfil";
+ }else{
+   //aqui los links exclusivos del usuario invitado
+   $pages['reg.php']="Registro";
+ }
 ?>
 
 
@@ -122,10 +130,11 @@ function menu(){
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong>Éxito!</strong>   
         <?php //se caza el nombre de usuario si se ha podido recoger por get y se muestra un mensaje personalizado de bienvenida
-        if(!empty($_GET['usr'])){ 
-        echo $_GET['usr'];
+        if(isset($_SESSION['usr'])){ 
+          echo $_SESSION['usr']->getname();
         }else{ 
-        echo "Usted";}
+          echo "Usted";
+        }
         ?> inició sesión correctamente.
       </div>
       <?php
@@ -167,6 +176,7 @@ function menu(){
   
 ?>
 <script>
+//funcion que se carga al inicial cualquier pagina
 $(function() {
 checkCookie();
 });
