@@ -1,5 +1,5 @@
 <?php 
-include "php/common.php";
+include_once "php/common.php";
 //include "php/funcion_enviarcorreo.php";
 session_start();
 ?>

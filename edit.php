@@ -1,5 +1,5 @@
 <?php 
-include "php/common.php";
+include_once "php/common.php";
 include_once "php/functions.php";
 include_once "php/MySQLDataSource.php";
 session_start();

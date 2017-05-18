@@ -1,6 +1,6 @@
 <?php
 include_once "functions.php";
-include "class/objetousuario.php";
+include_once "class/objetousuario.php";
 function menu(){
 ?>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">

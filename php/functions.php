@@ -1,5 +1,5 @@
 <?php
-include "MySQLDataSource.php";
+include_once "MySQLDataSource.php";
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];

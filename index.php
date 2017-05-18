@@ -1,5 +1,5 @@
 <?php 
-include "php/common.php";
+include_once "php/common.php";
 session_start();
 ?>
 <!DOCTYPE html>
