@@ -10,6 +10,7 @@ class usuario{
     private $id;
     private $pass;
     private $prof;//se guardará la profesión real y no el id
+    private $idprof;//el id de la profesion
     private $pic;//url foto
     private $name;
     private $surname;
@@ -28,6 +29,9 @@ class usuario{
     }
      function getprof(){
         return $this -> prof;
+    }
+    function getidprof(){
+        return $this -> idprof;
     }
     function getpic(){
         return $this -> pic;
@@ -55,6 +59,9 @@ class usuario{
      function setprof($prof){
         $this -> prof = $prof;
     }
+     function setidprof($idprof){
+        $this -> idprof = $idprof;
+    }
     function setpic($pic){
         $this -> pic = $pic;
     }
@@ -66,6 +73,13 @@ class usuario{
     }
     function setkarma($karma){
         $this -> karma =$karma;
+    }
+
+    function refresh(){
+        if($result = usrexists($_SESSION['usr']->getmail())){
+            $linea =$result->fetch_assoc();
+        }
+
     }
 
 }

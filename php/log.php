@@ -1,7 +1,7 @@
 <?php 
-include "functions.php";
-include "MySQLDataSource.php";
-include "class/objetousuario.php";
+include_once "functions.php";
+include_once "MySQLDataSource.php";
+include_once "class/objetousuario.php";
 session_start();
 /*realizar comprobaciones si el usuario existe*/
 /*si el usuario no es encontrado en la bbdd devolverlo de la página que viene*/
