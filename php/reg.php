@@ -1,6 +1,6 @@
 <?php
-include "functions.php";
-include "MySQLDataSource.php";
+include_once "functions.php";
+include_once  "MySQLDataSource.php";
 session_start();
 if(isset($_POST)){
     $emptyvals=array();

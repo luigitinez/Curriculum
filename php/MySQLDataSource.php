@@ -74,5 +74,35 @@ function profesiones(){
     $conn->close();
 }
 
+function listar(){
+
+    $conn = conectar();
+    $select = "SELECT `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
+     $result = $conn->query($select);
+    if ($result->num_rows > 0) {
+        $profesiones=array();
+        $i=0;
+        $usuarios=array();
+        while($row = $result->fetch_assoc()) {
+            /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
+            Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
+            $usuarios[$i]=new usuario();
+            $usuarios[$i]->setmail($row['mail']);
+            $usuarios[$i]->setprof($row['nombre_profesion']);
+            $usuarios[$i]->setpic($row['pic']);
+            $usuarios[$i]->setname($row['name']);
+            $usuarios[$i]->setsurname($row['surname']);
+            $usuarios[$i]->setkarma($row['admin']);
+            $i++;
+        }
+        $conn->close();        
+        return $usuarios;
+    } else {
+        $conn->close();    
+        return false;
+    }
+
+
+}
 
 ?>

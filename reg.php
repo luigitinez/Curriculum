@@ -1,6 +1,6 @@
 <?php
-include 'php/functions.php';
-include 'php/common.php';
+include_once 'php/functions.php';
+include_once 'php/common.php';
 session_start();
 backlogged();
 ?>

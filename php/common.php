@@ -23,10 +23,14 @@ function menu(){
   
   $activePage = geturl();
  if(isset($_SESSION['usr'])){
-   //aqui los links exclusivos del usuario logged
- $pages['editexp.php']="Experiencias";
- $pages['editfor.php']="Formacion";
- $pages['edit.php']="Editar Perfil";
+   if($_SESSION['usr']->getkarma()==0){
+        //aqui los links exclusivos del usuario logged
+      $pages['editexp.php']="Experiencias";
+      $pages['editfor.php']="Formacion";
+      $pages['edit.php']="Editar Perfil";
+   }else{
+      $pages['gestusr.php']="Gestionar Usuarios";
+   }
  
  }else{
    //aqui los links exclusivos del usuario invitado

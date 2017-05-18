@@ -69,5 +69,39 @@ function makeselect(){
 	}
 }
 
+function mostrarusuarios(){
+
+	$usrs=listar();
+	if($usrs!=false){
+		foreach($usrs as $key => $value){
+			if($value->getkarma()==1){
+?>
+				<tr class="info">
+					<td><?= $value->getname(); ?></td>
+					<td><?= $value->getsurname();?></td>
+					<td><?= $value->getmail();?></td>
+					<td><?= $value->getkarma();?></td>
+					<td><?= $value->getprof();?></td>
+					<td><?= $value->getsurname();?></td>
+				</tr>
+<?php 
+			}else{
+?>
+				<tr class="">
+					<td><?= $value->getname(); ?></td>
+					<td><?= $value->getsurname();?></td>
+					<td><?= $value->getmail();?></td>
+					<td><?= $value->getkarma();?></td>
+					<td><?= $value->getprof();?></td>
+					<td><?= $value->getsurname();?></td>
+				</tr>
+
+
+<?php
+			}//cierre else
+		}//cierre foreach
+	}//cierre if
+}
+
 	
 
