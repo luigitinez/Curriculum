@@ -8,6 +8,6 @@ include "functions.php";
     }else{
         //se nos redirege a index si se ha echo correctamente el logout 
         session_destroy();
-        turnback('logout=true');
+        header('Location: http://'.$_SERVER['HTTP_HOST'].'/index.php'); 
     }
 ?>

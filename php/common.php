@@ -20,10 +20,14 @@ function menu(){
   //index.php or controller
   //array que contiene todas las paginas que aparecen en el menu 
   $pages = array("index.php"=>"HOME","contact.php"=>"Contactenos");
+  
   $activePage = geturl();
  if(isset($_SESSION['usr'])){
    //aqui los links exclusivos del usuario logged
- $pages['edit.php']="Editar perfil";
+ $pages['editexp.php']="Experiencias";
+ $pages['editfor.php']="Formacion";
+ $pages['edit.php']="Editar Perfil";
+ 
  }else{
    //aqui los links exclusivos del usuario invitado
    $pages['reg.php']="Registro";
@@ -131,7 +135,7 @@ function menu(){
         <strong>Éxito!</strong>   
         <?php //se caza el nombre de usuario si se ha podido recoger por get y se muestra un mensaje personalizado de bienvenida
         if(isset($_SESSION['usr'])){ 
-          echo $_SESSION['usr']->getname();
+          echo $_SESSION['usr']->getname().",";
         }else{ 
           echo "Usted";
         }
