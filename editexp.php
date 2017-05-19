@@ -5,19 +5,13 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inicio</title>
-	<?php styles(); ?> 
+	<title>Contacto</title>
+	<?php styles();?>
 </head>
 <body>
 <?php menu(); ?>
+<h2>Experiencias</h2>
 
 
-<center>
-<div class="container">
-<h1>Bienvenido a <i>Curriculum</i></h1>
-	
-</div>
-
-</center>
 </body>
 </html>
