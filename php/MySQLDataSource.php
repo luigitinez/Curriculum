@@ -1,9 +1,9 @@
 <?php
 
 function conectar(){
-    @$connect = new mysqli("localhost","root","root","curriculum");
+   // @$connect = new mysqli("localhost","root","root","curriculum");
   //  @$connect = new mysqli("danigody001.mysql.guardedhost.com","danigody001_luismg","qqC-9kU-2LB-pS8","danigody001_cvproject");
-    //@$connect = new mysqli("localhost","root","","curriculum");
+    @$connect = new mysqli("localhost","root","","curriculum");
     if($connect->connect_errno){
        printf("<h1><span>LA CONEXIÓN CON LA BASE DE DATOS HA FALLADO: %s\n".$connect->connect_error."</span></h1>");
        exit();
@@ -16,7 +16,7 @@ function usrexists ($mail){
     $enlace= conectar();
     //generamos una consulta para enviar a la bbdd
         //    SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = 'lmgspain@hotmail.com'
-  $query = "SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
+  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
   //$query="SELECT * FROM `usr` WHERE `mail` = '".$mail."'";
   if(!$result =$enlace->query($query)){
    //la consulta no se ha realizado con exito
@@ -78,7 +78,7 @@ function profesiones(){
 function listar(){
 
     $conn = conectar();
-    $select = "SELECT `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
+    $select = "SELECT `id_usr`, `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
      $result = $conn->query($select);
     if ($result->num_rows > 0) {
         $profesiones=array();
@@ -88,12 +88,14 @@ function listar(){
             /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
             Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
             $usuarios[$i]=new usuario();
-            $usuarios[$i]->setmail($row['mail']);
-            $usuarios[$i]->setprof($row['nombre_profesion']);
             $usuarios[$i]->setpic($row['pic']);
+            $usuarios[$i]->setid($row['id_usr']);
+            $usuarios[$i]->setmail($row['mail']);
             $usuarios[$i]->setname($row['name']);
-            $usuarios[$i]->setsurname($row['surname']);
             $usuarios[$i]->setkarma($row['admin']);
+            $usuarios[$i]->setsurname($row['surname']);            
+            $usuarios[$i]->setprof($row['nombre_profesion']);
+            
             $i++;
         }
         $conn->close();        
@@ -104,6 +106,20 @@ function listar(){
     }
 
 
+}
+
+function deleteusr($id){
+    $conn = conectar();
+    $del = "DELETE FROM `usr` WHERE `id_usr` =".$id;
+    if ($conn->query($del) === TRUE) {
+    //echo "Record deleted successfully";
+    return true;
+} else {
+    //echo "Error deleting record: " . $conn->error;
+    return false;
+}
+
+$conn->close();
 }
 
 ?>
