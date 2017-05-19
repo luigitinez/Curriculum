@@ -11,7 +11,9 @@ session_start();
 </head>
 <body>
 <?php menu(); ?>
-
+<div class="container">
+<?php checkdel();?>
+</div>
 
 <center>
 <div class="container">

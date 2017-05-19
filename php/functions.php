@@ -80,9 +80,10 @@ function mostrarusuarios(){
 					<td><?= $value->getname(); ?></td>
 					<td><?= $value->getsurname();?></td>
 					<td><?= $value->getmail();?></td>
-					<td><?= $value->getkarma();?></td>
+					<td>Administrador</td>
 					<td><?= $value->getprof();?></td>
-					<td><?= $value->getsurname();?></td>
+					<td> <a href=<?= "'".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>></a> </td>
+					<td></td>
 				</tr>
 <?php 
 			}else{
@@ -91,9 +92,10 @@ function mostrarusuarios(){
 					<td><?= $value->getname(); ?></td>
 					<td><?= $value->getsurname();?></td>
 					<td><?= $value->getmail();?></td>
-					<td><?= $value->getkarma();?></td>
+					<td>Cliente</td>
 					<td><?= $value->getprof();?></td>
-					<td><?= $value->getsurname();?></td>
+					<td> <a href=<?= "'".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>></a></td>
+					<td><form method="POST" action="php/eraseusr.php"> <input type="submit" class="btn btn-danger" value="borrar" name=<?= $value->getid();?>></form></td>
 				</tr>
 
 
@@ -103,5 +105,29 @@ function mostrarusuarios(){
 	}//cierre if
 }
 
-	
+function catchkey($post){
+	foreach ($post as $key => $value) {
+		return $key;
+	}
+}
+
+function checkdel(){
+	if(isset($_GET['del'])){
+		if($_GET['del']==true){//usuario borrado con exito
+?>
+			<div class="alert alert-success">
+    			<strong>Éxito!</strong> El usuario se eliminó con éxito.
+  			</div>
+<?php
+		}else{//usuario no fue borrado
+?>
+			<div class="alert alert-warning">
+ 				<strong>Error!</strong> No se pudo borrar el usuario de la base de datos.
+			</div>
+
+<?php
+		}
+
+	}
+}	
 
