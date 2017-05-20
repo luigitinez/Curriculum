@@ -1,5 +1,6 @@
 <?php
 include_once "MySQLDataSource.php";
+include_once "class/objetousuario.php";
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];
@@ -52,7 +53,7 @@ function makeselect(){
 	if($values!=false){
 ?>
 	 
-	 <select class='form-control'>
+	 <select class='form-control' name='prof'>
 <?php
 	
 	foreach ($values as $key => $value) {
@@ -130,4 +131,34 @@ function checkdel(){
 
 	}
 }	
+//actualiza los datos en la base de datos y verifica. Se le pasa un parametro que revisa que parametros debe cambiar
+function editprofile($config){
+	if($config==0){//solo se ha enviado la profesion
+		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();//pendiente añadir edición de imagen (revisar si se ha posteado etc)
+	}elseif ($config==1) {//se envia profesion e imagen
+		
+	}elseif ($config==3) {//se envia profesion y contraseña
 
+	}
+	else{//se envia todo
+
+	}
+
+	$result=makeupdate($update);//intentamos hacer la actualizacion en la base de datos
+	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
+	return $result;//devolvemos el resultado de la consulta a la bbdd (el update de makeupdate)
+}
+function checkprof(){
+	 if($_POST['prof']!=$_SESSION['usr']->getidprof()){
+       return true;//las profesiones no son iguales
+    }else{
+		return false;//las profesiones son iguales no hacer anda
+	}
+}
+
+function checkpass(){
+	//devolver 0 si todo esta bien
+	//devolver 1 si la old no es correcta
+	//devolver 2 si las contraseñas no coinciden 
+	echo "hola";
+}

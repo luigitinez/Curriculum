@@ -35,6 +35,7 @@ else{
 
  /*----------------------------creamos el objeto usuario y lo almacenamos en la sesion usr-----------------------------*/
             $_SESSION['usr']=new usuario();
+            $_SESSION['usr']->setid($linea['id_usr']);            
             $_SESSION['usr']->setmail($linea['mail']);
             $_SESSION['usr']->setpass($linea['pass']);
             $_SESSION['usr']->setprof($linea['nombre_profesion']);

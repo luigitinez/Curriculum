@@ -78,6 +78,11 @@ class usuario{
     function refresh(){
         if($result = usrexists($_SESSION['usr']->getmail())){
             $linea =$result->fetch_assoc();
+
+            $_SESSION['usr']->setpass($linea['pass']);
+            $_SESSION['usr']->setprof($linea['nombre_profesion']);
+            $_SESSION['usr']->setpic('media/usrimg/'.$linea['pic']);
+
         }
 
     }
