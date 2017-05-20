@@ -55,7 +55,7 @@ if(isset($_POST)){
                 <label>Mensaje</label>
             </div>
             <div class="group">
-                <input type="submit" class="btn btn-warning" >
+                <center><button type="submit" class="btn btn-warning">Enviar <span class="glyphicon glyphicon-send"></span></button></center>
             </div>
         </form>
 
