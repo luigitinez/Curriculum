@@ -112,14 +112,25 @@ function deleteusr($id){
     $conn = conectar();
     $del = "DELETE FROM `usr` WHERE `id_usr` =".$id;
     if ($conn->query($del) === TRUE) {
-    //echo "Record deleted successfully";
-    return true;
-} else {
-    //echo "Error deleting record: " . $conn->error;
-    return false;
-}
+        //echo "Record deleted successfully";
+        return true;
+    } else {
+        //echo "Error deleting record: " . $conn->error;
+        return false;
+    }
 
 $conn->close();
 }
 
+function makeupdate($upd){
+    $con=conectar();
+    if ($con->query($upd) === TRUE) {
+        //echo "Record deleted successfully";
+        return true;
+    } else {
+        //echo "Error deleting record: " . $conn->error;
+        return false;
+    }
+
+}
 ?>
