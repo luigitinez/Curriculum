@@ -23,7 +23,14 @@ function geturl($navdir=""){
 			if(strcmp($actual_link,$_SERVER['HTTP_REFERER'])==0){//si la pagina anterior es la misma que la actual (hay que replicarla al otro else por si lleva parámetros la funcion)
 				header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 
 			}else{
-				header('Location: '.$_SERVER['HTTP_REFERER'].$params); 
+					//miramos si la anterior pagina es reg.php
+				$pos=strpos($_SERVER['HTTP_REFERER'],"/",-1);
+				$actual_page=substr($_SERVER['HTTP_REFERER'],$pos);
+				if(strcmp($actual_page,"reg.php")){
+					header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 		
+				}else{
+				header('Location: '.$_SERVER['HTTP_REFERER'].$params);
+				} 
 			}
 		}else{
 			$url=explode("?",$_SERVER['HTTP_REFERER']);
