@@ -107,6 +107,31 @@ function listar(){
 
 
 }
+function listprof($select){
+    $conn=conectar();
+     $result = $conn->query($select);
+    if ($result->num_rows > 0) {
+        $profesiones=array();
+        $i=0;
+        $profesiones=array();
+        while($row = $result->fetch_assoc()) {
+            /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
+            Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
+            $profesiones[$i]=new profesion();
+            $profesiones[$i]->setid($row['id_prof']);
+            $profesiones[$i]->setname($row['nombre_profesion']);
+            $profesiones[$i]->settotal($row['total']);
+           
+            
+            $i++;
+        }
+        $conn->close();        
+        return $profesiones;
+    } else {
+        $conn->close();    
+        return false;
+    }
+}
 
 function deleteusr($id){
     $conn = conectar();
@@ -122,15 +147,39 @@ function deleteusr($id){
 $conn->close();
 }
 
-function makeupdate($upd){
-    $con=conectar();
-    if ($con->query($upd) === TRUE) {
+function deleteprof($id){
+        $conn = conectar();
+    $del = "DELETE FROM `profesion` WHERE `id_prof` =".$id;
+    if ($conn->query($del) === TRUE) {
         //echo "Record deleted successfully";
         return true;
     } else {
         //echo "Error deleting record: " . $conn->error;
         return false;
     }
+}
 
+function makeupdate($upd){
+    $con=conectar();
+    if ($con->query($upd) === TRUE) {
+       
+        return true;
+    } else {
+    
+        return false;
+    }
+
+}
+function addprof($name){
+    $sqlins="INSERT INTO `profesion`(`nombre_profesion`) VALUES ('".$name."')";
+    $mysqli=conectar();
+    if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
+        $mysqli->close();
+        return true;
+    } else {//devolver error catastrofico
+        $mysqli->close();        
+        return false;
+        //registrar en el log el error de base de datos //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
 }
 ?>

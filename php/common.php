@@ -25,11 +25,12 @@ function menu(){
  if(isset($_SESSION['usr'])){
    if($_SESSION['usr']->getkarma()==0){
         //aqui los links exclusivos del usuario logged
-      $pages['editexp.php']="Experiencias";
-      $pages['editfor.php']="Formacion";
-      $pages['edit.php']="Editar Perfil";
+      $pages['editexp.php']       ="Experiencias";
+      $pages['editfor.php']       ="Formacion";
+      $pages['edit.php']          ="Editar Perfil";
    }else{
-      $pages['gestusr.php']="Gestionar Usuarios";
+      $pages['gestusr.php']       = "Gestionar Usuarios";
+      $pages['profesiones.php']   = "Gestion Profesiones";
    }
  
  }else{

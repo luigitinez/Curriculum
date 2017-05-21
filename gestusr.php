@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inicio</title>
+	<title>Gestionar Usuarios</title>
 	<?php styles(); ?> 
 </head>
 <body>
@@ -22,10 +22,10 @@ session_start();
      <table class="table">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellido/s</th>
+                <th class="hidden-xs">Nombre</th>
+                <th class="hidden-xs">Apellido/s</th>
                 <th>Mail</th>
-                <th>Tipo</th>
+                <th class="hidden-xs">Tipo</th>
                 <th>Profesion</th>
                 <th>Imagen</th>
             </tr>
