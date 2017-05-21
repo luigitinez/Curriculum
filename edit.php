@@ -14,7 +14,7 @@ session_start();
 <?php menu(); ?>
 
 <div class="container">
-    <h2>Editar Perfil</h2>
+    <h2>Editar Perfil </h2>
     <!--Se muestra tabla de datos no editables visible en version no movil-->
 <table class="table hidden-xs">
     <tr><td> <h4><span class="label label-default">Nombre:</span></h4></td>     <td> <h4><span class="label label-default">Correo:</span></h4></td> </tr>
@@ -28,12 +28,32 @@ session_start();
     <h3><span class="label label-info"><?= $_SESSION['usr']->getmail();?></span></h3>
 
 </div>   
-      
     <form action="php/editusr.php" method="POST">
+        <img class="img-edit"  src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>>        
+        <div class="form-group">
+            <label class="control-label">Select File</label>
+            <input id="input-21" type="file" accept="image/*" class="file-loading">
+            <script>
+            $(document).on('ready', function() {
+                $("#input-21").fileinput({
+                    previewFileType: "image",
+                    browseClass: "btn btn-success",
+                    browseLabel: "Pick Image",
+                    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
+                    removeClass: "btn btn-danger",
+                    removeLabel: "Delete",
+                    removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
+                    uploadClass: "btn btn-info",
+                    uploadLabel: "Upload",
+                    uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
+                });
+            });
+            </script>
+        </div>
         <input type="hidden" value=<?= "'".$_SESSION['usr']->getid()."'"; ?>>
                                     
-        <div class='form-group'>
-           <h4><lable class="label label-default">Profesión:</lable></h4>
+        <div class='form-group' >
+           <h4><lable class="label label-default" >Profesión:</lable></h4>
                 <?php makeselect(); ?>
         </div>
         <fieldset><legend>Cambiar Contraseña</legend>

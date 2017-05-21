@@ -1,4 +1,3 @@
-
 /*BLOQUE CSS COOKIES*/
 #barraaceptacion {
     display:none;
@@ -14,9 +13,16 @@
     color:#fff;
     z-index:99999;
 }
+.container{
+    margin-bottom: 10px;
+}
 .img-icon{
     height: 50px;
     width: 50px;
+}
+.img-edit{
+    height: 200px;
+    width: 200px;
 }
 .inner {
     width:100%;
