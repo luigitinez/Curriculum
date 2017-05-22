@@ -9,6 +9,8 @@ session_start();
 <head>
 	<title>Contacto</title>
 	<?php styles();?>
+    <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="js/fileinput.js" type="text/javascript"></script>
 </head>
 <body>
 <?php menu(); ?>
@@ -28,25 +30,17 @@ session_start();
     <h3><span class="label label-info"><?= $_SESSION['usr']->getmail();?></span></h3>
 
 </div>   
-    <form action="php/editusr.php" method="POST">
+    <form action="php/editusr.php" method="POST" enctype="multipart/form-data">
         <img class="img-edit"  src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>>        
         <div class="form-group">
-            <label class="control-label">Select File</label>
-            <input id="input-21" type="file" accept="image/*" class="file-loading">
+            <h4><span class="label label-default">Cambiar Imágen:</span></h4>
+            <input id="file-2" type="file" class="file" value="Cargar" accept="image/*" multiple=true data-preview-file-type="any">
             <script>
-            $(document).on('ready', function() {
-                $("#input-21").fileinput({
-                    previewFileType: "image",
-                    browseClass: "btn btn-success",
-                    browseLabel: "Pick Image",
-                    browseIcon: "<i class=\"glyphicon glyphicon-picture\"></i> ",
-                    removeClass: "btn btn-danger",
-                    removeLabel: "Delete",
-                    removeIcon: "<i class=\"glyphicon glyphicon-trash\"></i> ",
-                    uploadClass: "btn btn-info",
-                    uploadLabel: "Upload",
-                    uploadIcon: "<i class=\"glyphicon glyphicon-upload\"></i> "
-                });
+            $("#file-2").fileinput({
+            showCaption: true,
+            showUpload: false,
+
+
             });
             </script>
         </div>
