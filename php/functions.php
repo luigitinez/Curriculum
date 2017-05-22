@@ -40,7 +40,7 @@ function geturl($navdir=""){
 
 	function backlogged(){
 		if(isset($_SESSION['usr'])){
-			turnback();
+			header('Location: http://'.$_SERVER['HTTP_HOST']);
 		}
 	}
 	function backunlogged(){
@@ -179,8 +179,25 @@ function editprof($id,$newname){
 
 //actualiza los datos en la base de datos y verifica. Se le pasa un parametro que revisa que parametros debe cambiar
 function editprofile($config){
+	switch ($total) {
+    case 0:
+        if($prof==true){           
+			$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+       }else{
+           return null;
+       }
+        break;
+	case 1:
+		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pic`='".$_SESSION['tmp_img']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+    case 3:
+        #code...
+    case 4:
+        # code...
+        break;
+}
+
 	if($config==0){//solo se ha enviado la profesion
-		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();//pendiente añadir edición de imagen (revisar si se ha posteado etc)
+		
 	}elseif ($config==1) {//se envia profesion e imagen
 		
 	}elseif ($config==3) {//se envia profesion y contraseña
