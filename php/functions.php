@@ -19,17 +19,20 @@ function geturl($navdir=""){
 			$params="?".$params;
 		}
 		$actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];//link de la pagina en la que nos encontramos ahora mismo
-		if(strpos($_SERVER['HTTP_REFERER'],"?")===false){
+		if(strpos($_SERVER['HTTP_REFERER'],"?")===false){//miramos si la pagina anterior tiene un get
 			if(strcmp($actual_link,$_SERVER['HTTP_REFERER'])==0){//si la pagina anterior es la misma que la actual (hay que replicarla al otro else por si lleva parámetros la funcion)
 				header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 
 			}else{
 					//miramos si la anterior pagina es reg.php
-				$pos=strpos($_SERVER['HTTP_REFERER'],"/",-1);
+				$pos=strrpos($_SERVER['HTTP_REFERER'],'/');//buscamos donde está la ultima barra
 				$actual_page=substr($_SERVER['HTTP_REFERER'],$pos);
-				if(strcmp($actual_page,"reg.php")){
-					header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 		
+				if(strcmp($actual_page,"reg.php")===0){
+
+					header('Location: http://' . $_SERVER['HTTP_HOST'] . $params); 	
+
 				}else{
-				header('Location: '.$_SERVER['HTTP_REFERER'].$params);
+
+					header('Location: '. $_SERVER['HTTP_REFERER'] . $params);
 				} 
 			}
 		}else{
@@ -179,7 +182,7 @@ function editprof($id,$newname){
 
 //actualiza los datos en la base de datos y verifica. Se le pasa un parametro que revisa que parametros debe cambiar
 function editprofile($config){
-	switch ($total) {
+	switch ($config) {
     case 0:
         if($prof==true){           
 			$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
@@ -265,6 +268,16 @@ function checkeditprof(){
 		}
 	}
 
+}
+function checkimage(){
+	if (is_uploaded_file ($_FILES['imagen']['tmp_name'] )){//como un isset($_FILES)
+	$nombreDirectorio = "/media/";
+	$nombreFichero = $_FILES['imagen']['name'];
+	$nombreCompleto = $nombreDirectorio.$nombreFichero;
+	move_uploaded_file ($_FILES['imagen']['tmp_name'],$nombreCompleto);
+	}else{
+		return false;
+	}
 }
 
 function checkpass(){
