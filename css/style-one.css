@@ -97,4 +97,8 @@
         background-color: inherit;
         border-top:0 none;
     }
+
+   .navbar-nav>li>a{
+       text-align: center;
+   }
 }
