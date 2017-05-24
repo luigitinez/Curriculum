@@ -162,10 +162,10 @@ function deleteprof($id){
 function makeupdate($upd){
     $con=conectar();
     if ($con->query($upd) === TRUE) {
-       
+       $con->close();
         return true;
     } else {
-    
+        $con->close();
         return false;
     }
 

@@ -91,6 +91,10 @@ if(isset($_GET["usr"])&& isset($_GET['reg']) && strcasecmp($_GET['reg'],'false')
 							</div>
 						</div>
 
+						<div class="calendar">
+			
+						</div>
+
 						<div class="form-group">
 							<label for="username" class="cols-sm-2 control-label">Apellido/s</label>
 							<div class="cols-sm-10">

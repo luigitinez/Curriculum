@@ -183,37 +183,43 @@ function editprof($id,$newname){
 //actualiza los datos en la base de datos y verifica. Se le pasa un parametro que revisa que parametros debe cambiar
 function editprofile($config){
 	switch ($config) {
-    case 0:
-        if($prof==true){           
-			$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
-       }else{
-           return null;
-       }
+    case 0:  //solo se ha enviado la profesion       
+		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."' WHERE `id_usr`=".$_SESSION['usr']->getid();	
         break;
-	case 1:
+	case 1://se envia profesion e imagen
 		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pic`='".$_SESSION['tmp_img']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
-    case 3:
-        #code...
-    case 4:
-        # code...
+    case 3://se envia profesion y contraseña
+       $update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pass` ='".md5($_POST['newpass'])."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+    case 4://se envia todo
+       $update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pic`='".$_SESSION['tmp_img']."', `pass` ='".md5($_POST['newpass'])."' WHERE `id_usr`=".$_SESSION['usr']->getid();
         break;
 }
 
-	if($config==0){//solo se ha enviado la profesion
-		
-	}elseif ($config==1) {//se envia profesion e imagen
-		
-	}elseif ($config==3) {//se envia profesion y contraseña
-
-	}
-	else{//se envia todo
-
-	}
 
 	$result=makeupdate($update);//intentamos hacer la actualizacion en la base de datos
+	if($config ==4 || $config==1){
+		//removeOld_Pic($result);
+	}
 	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
 	return $result;//devolvemos el resultado de la consulta a la bbdd (el update de makeupdate)
 }
+
+function removeOld_Pic($result){//borra del servidor la imagen que pertenecia al usuario si es diferente de default
+	if($result){
+		
+		if(strcmp($_SESSION['usr']->getpic(),'default.jpg')!=0){
+			unlink("../".$_SESSION['usr']->getpic());
+		}
+	}
+}
+
+function backdefault(){//hace que el usuario vuelva a tener la foto por defecto
+	$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$_SESSION['usr']->getid());
+	//removeOld_Pic($result);
+	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
+	return $result;
+}
+
 function checkprof(){
 	 if($_POST['prof']!=$_SESSION['usr']->getidprof()){
        return true;//las profesiones no son iguales
@@ -269,20 +275,71 @@ function checkeditprof(){
 	}
 
 }
-function checkimage(){
+function checkimg(){
 	if (is_uploaded_file ($_FILES['imagen']['tmp_name'] )){//como un isset($_FILES)
-	$nombreDirectorio = "/media/";
-	$nombreFichero = $_FILES['imagen']['name'];
-	$nombreCompleto = $nombreDirectorio.$nombreFichero;
-	move_uploaded_file ($_FILES['imagen']['tmp_name'],$nombreCompleto);
+		$nombreDirectorio = "../media/usrimg/";
+		$nombreFichero = $_FILES['imagen']['name'];
+		if(is_dir($nombreDirectorio)){
+			$pos = strpos($nombreFichero,'.');
+			$ext = substr($nombreFichero,$pos);
+			$nombreFichero = uniqid('img_').time().$ext;
+			$nombreCompleto = $nombreDirectorio.$nombreFichero;
+			move_uploaded_file ($_FILES['imagen']['tmp_name'],$nombreCompleto);
+			$_SESSION['tmp_img']=$nombreFichero;
+			return true;
+
+		}else{
+		
+		}
+		
 	}else{
+		
 		return false;
 	}
 }
 
 function checkpass(){
+	if( strcmp( md5( $_POST['oldpass'] ), $_SESSION['usr']->getpass()) == 0){//se comprueba si la contraseña actual y la introducida en el primer input coinciden
+		if ( $_POST['newpass']==$_POST['repeatpass']){//se comprueba si la nueva contraseña y repetir contraseña coinciden
+			return 0;//exito
+		}else{
+			return 2;//no coinciden las contraseñas
+		}
+	}else{
+		return 1;//la contraseña actual introducida no coincide
+	}
 	//devolver 0 si todo esta bien
 	//devolver 1 si la old no es correcta
 	//devolver 2 si las contraseñas no coinciden 
-	echo "hola";
+}
+
+function passerrors(){
+	if(isset($_GET['passch'])){
+		switch ($_GET['passch']) {
+			case 0:
+				$state='success';
+				$message="La contraseña se modificó correctamente";
+				break;
+			case 1:
+				$state='danger';
+				$message='La contraseña no es correcta';
+				break;
+			case 2:
+				$state='warning';
+				$message='Las contraseñas no coinciden';
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+?>
+		<div class="container">
+			<div class=<?php echo '"alert alert-'.$state.' alert-dismissable fade in"' ?>>
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<?php echo  $message;?>
+			</div>
+		</div>
+<?php
+	}
 }

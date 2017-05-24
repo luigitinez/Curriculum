@@ -31,7 +31,7 @@ else{
     }else{*///saltamos a la linea para para revistar la contraseña
       if($result = usrexists($usr)){
       $linea =$result->fetch_assoc();
-      if (strcmp($linea['pass'],$pass)==0){//comparas los str para saber si la contraseña esta bn
+      if (strcmp($linea['pass'],md5($pass))==0){//comparas los str para saber si la contraseña esta bn
 
  /*----------------------------creamos el objeto usuario y lo almacenamos en la sesion usr-----------------------------*/
             $_SESSION['usr']=new usuario();

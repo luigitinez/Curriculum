@@ -22,7 +22,7 @@ if(isset($_POST)){
             $mail=$_POST['email'];
             $name=$_POST['nombre'];
             $surname=$_POST['apellido'];
-            $pass=$_POST['contrasena'];
+            $pass=md5($_POST['contrasena']);
             //intentar registro
             if(!usrexists($mail)){//comprueba si el usuario ya esta registrado para no duplicar registros y crear problemas en la BBDD
                 if(regusr($mail,$pass,$name,$surname)===true){//programar para impedir 2 registros con un mismo mail
