@@ -217,8 +217,9 @@ function removeOld_Pic($result){//borra del servidor la imagen que pertenecia al
 			//comprobar que existe
 			if(file_exists($_SESSION['usr']->getpic())){
 				unlink("../".$_SESSION['usr']->getpic());
+			//en deploy ->		unlink("/".$_SESSION['usr']->getpic());
 			}else{
-				die($_SESSION['usr']->getpic());
+				
 			}
 		}
 	}
