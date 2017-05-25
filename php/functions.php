@@ -188,17 +188,21 @@ function editprofile($config){
         break;
 	case 1://se envia profesion e imagen
 		$update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pic`='".$_SESSION['tmp_img']."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+		break;
     case 3://se envia profesion y contraseña
        $update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pass` ='".md5($_POST['newpass'])."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+       break;
     case 4://se envia todo
        $update="UPDATE `usr` SET `FK_id_prof`='".$_POST['prof']."', `pic`='".$_SESSION['tmp_img']."', `pass` ='".md5($_POST['newpass'])."' WHERE `id_usr`=".$_SESSION['usr']->getid();
         break;
+    default:
+    	#code
+    break;
 }
-
 
 	$result=makeupdate($update);//intentamos hacer la actualizacion en la base de datos
 	if($config ==4 || $config==1){
-		//removeOld_Pic($result);
+		removeOld_Pic($result);
 	}
 	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
 	return $result;//devolvemos el resultado de la consulta a la bbdd (el update de makeupdate)
@@ -206,16 +210,22 @@ function editprofile($config){
 
 function removeOld_Pic($result){//borra del servidor la imagen que pertenecia al usuario si es diferente de default
 	if($result){
-		
-		if(strcmp($_SESSION['usr']->getpic(),'default.jpg')!=0){
-			unlink("../".$_SESSION['usr']->getpic());
+		$pos = strrpos($_SESSION['usr']->getpic(), '/');
+		$img = substr($_SESSION['usr']->getpic(), $pos);
+		if(strcmp($_SESSION['usr']->getpic(),'/default.jpg')!=0){
+			//comprobar que existe
+			if(file_exists($_SESSION['usr']->getpic())){
+				unlink("../".$_SESSION['usr']->getpic());
+			}else{
+				die($_SESSION['usr']->getpic());
+			}
 		}
 	}
 }
 
 function backdefault(){//hace que el usuario vuelva a tener la foto por defecto
 	$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$_SESSION['usr']->getid());
-	//removeOld_Pic($result);
+	removeOld_Pic($result);
 	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
 	return $result;
 }
