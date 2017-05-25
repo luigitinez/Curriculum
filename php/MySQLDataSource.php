@@ -158,6 +158,10 @@ function deleteprof($id){
         return false;
     }
 }
+function makecvs(){
+    $conn  = conectar();
+    $sql   = 'SELECT `name`,`surname`,prof.nombre_profesion, `pic` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
+}
 
 function makeupdate($upd){
     $con=conectar();

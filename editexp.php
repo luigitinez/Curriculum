@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Contacto</title>
+	<title>Experiencia</title>
 	<?php styles();?>
 </head>
 <body>

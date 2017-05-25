@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Gestionar Usuarios</title>
+	<title>Gestion Usuarios</title>
 	<?php styles(); ?> 
 </head>
 <body>
@@ -17,7 +17,7 @@ session_start();
 
 <center>
 <div class="container">
-<h1>Gestion de Usuarios</h1>
+<h1>Gestión de Usuarios</h1>
 <div class="container">
      <table class="table">
         <thead>

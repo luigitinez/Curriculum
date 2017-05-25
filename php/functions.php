@@ -131,7 +131,7 @@ function mostrarprofesiones(){
 		<td><input type="text" name="prof" value=<?= "'". $value->getname()."'";?>></td>
 		<td><?= $value->gettotal();?></td>
 		<input type="hidden" value=<?= $value->getid();?> name="id" >
-		<td><input type="submit" class="btn btn-info" name="edit" value="Editar"> </td>
+		<td><input type="submit" class="btn btn-info" name="edit" value="Actualizar"> </td>
 		</form>
 		<form method="POST" action="php/eraseprof.php">
 		<td><input type="submit" name=<?= $value->getid();?> class="btn btn-danger" value="Borrar"></td>
@@ -322,6 +322,20 @@ function checkpass(){
 	//devolver 1 si la old no es correcta
 	//devolver 2 si las contraseñas no coinciden 
 }
+function sendWelcomeMail($mail,$fullname){
+	$subject = "Mensaje de www.cvproject.tk";
+	$message = "Estimado/a $fullname,\n \r \n \r Usted se ha registrado en nuestra página web. Le damos la bienvenida y esperemos que disrute de nuestros servicios.";
+	$from	 = "From: info@cvproject.tk";
+	$headers = "-f info@cvproject.tk";
+	mail($mail,$subject,$from,$headers);
+}
+
+function mostrarcv(){
+	$cvs=makecvs();
+	//con el array recibido hacer foreach e imprimir cajas con link que lleven a la pagina
+	//que mostrará el curriculum de la persona
+	}
+
 
 function passerrors(){
 	if(isset($_GET['passch'])){

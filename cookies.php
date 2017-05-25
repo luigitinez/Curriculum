@@ -4,7 +4,7 @@ session_start();
 ?>
 <html>
 <head>
-	<title>Registro</title>
+	<title>Cookies</title>
 	<?php styles(); ?>
 	<link rel="stylesheet" type="text/css" href="css/style-cookies.css"/>
 </head>

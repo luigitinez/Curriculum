@@ -26,6 +26,7 @@ if(isset($_POST)){
             //intentar registro
             if(!usrexists($mail)){//comprueba si el usuario ya esta registrado para no duplicar registros y crear problemas en la BBDD
                 if(regusr($mail,$pass,$name,$surname)===true){//programar para impedir 2 registros con un mismo mail
+                    sendWelcomeMail($_POST['email'],$_POST['nombre']. " " .$_POST['apellido']);
                     turnback("reg=true");
                 }
                 else{//si falló el insert en la bbdd
