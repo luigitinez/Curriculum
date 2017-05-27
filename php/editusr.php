@@ -18,6 +18,7 @@ if(isset($_POST['submit'])){
             }else{//actualizamos solo la contraseña
                 editprofile(3);
             }
+            turnback("passch=".$resultpass);
         }
     }else{
         //comprobar si se ha posteado la imagen
@@ -40,7 +41,7 @@ if(isset($_POST['submit'])){
 }else{
     turnback();
 }
-turnback();
+//turnback();
 /*if(isset($_SESSION['tmp_img'])){
     print_r($_SESSION['tmp_img']);
 }*/
