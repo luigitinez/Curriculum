@@ -158,6 +158,33 @@ function deleteprof($id){
         return false;
     }
 }
+function makecvs(){
+    $conn  = conectar();
+    $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // recorremos la consulta
+        $cvs=array();
+        $i=0;
+        while($row = $result->fetch_assoc()) {
+            $cvs[$i]= new cv;
+            $cvs[$i]->setid($row["id_usr"]);
+            $cvs[$i]->setpic('media/usrimg/'.$row["pic"]);
+            $cvs[$i]->setname($row["name"]);
+            $cvs[$i]->setsurname($row["surname"]);
+            $cvs[$i]->setprofesion($row["nombre_profesion"]);
+            //$cvs[$i]->setformacion($row["formacion"]);
+            //$cvs[$i]->setexperiencias($row["experiencias"]);
+           
+            $i++;
+        }
+    } else {
+       $cvs=false;
+    }
+    return $cvs;
+$conn->close();
+
+}
 
 function makeupdate($upd){
     $con=conectar();

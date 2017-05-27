@@ -14,10 +14,6 @@ if(isset($_POST['submit'])){
             turnback("passch=".$resultpass);
         }else{//la contraseña se ha posteado y esta correctamente
             if($img){//actualizamos imagen y contraseña
-                echo "<br> old ".$_POST['oldpass'];
-                echo "<br> new".$_POST['newpass'];
-                echo "<br> repeat".$_POST['repeatpass'];
-                exit();
                 editprofile(4);
             }else{//actualizamos solo la contraseña
                 editprofile(3);

@@ -2,6 +2,7 @@
 include_once "MySQLDataSource.php";
 include_once "class/objetousuario.php";
 include_once "class/objetoprofesion.php";
+include_once "class/objetocv.php";
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];
@@ -131,7 +132,7 @@ function mostrarprofesiones(){
 		<td><input type="text" name="prof" value=<?= "'". $value->getname()."'";?>></td>
 		<td><?= $value->gettotal();?></td>
 		<input type="hidden" value=<?= $value->getid();?> name="id" >
-		<td><input type="submit" class="btn btn-info" name="edit" value="Editar"> </td>
+		<td><input type="submit" class="btn btn-info" name="edit" value="Actualizar"> </td>
 		</form>
 		<form method="POST" action="php/eraseprof.php">
 		<td><input type="submit" name=<?= $value->getid();?> class="btn btn-danger" value="Borrar"></td>
@@ -322,6 +323,61 @@ function checkpass(){
 	//devolver 1 si la old no es correcta
 	//devolver 2 si las contraseñas no coinciden 
 }
+function sendWelcomeMail($mail,$fullname){
+	$subject = "Mensaje de www.cvproject.tk";
+	$message = "Estimado/a $fullname,\n \r \n \r Usted se ha registrado en nuestra página web. Le damos la bienvenida y esperemos que disrute de nuestros servicios.";
+	$from	 = "From: info@cvproject.tk";
+	$headers = "-f info@cvproject.tk";
+	mail($mail,$subject,$message,$from,$headers);
+}
+
+function mostrarcv(){
+	$cvs=makecvs();
+	if($cvs){
+		echo "<div class='container'>";
+		foreach ($cvs as $key => $value) {
+?>
+
+
+			<div class="well">
+				<div class="media">
+					<a class="pull-left" href="#">
+						<img class="media-object" src=<?= $value->getpic(); ?>>
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><?= $value->getname() . " " . $value->getsurname(); ?></h4>
+					<p class="text-right"><?= $value->getprofesion();?></p>
+					<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
+			Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
+			dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
+			Aliquam in felis sit amet augue.</p>
+					<ul class="list-inline list-unstyled">
+						<li><span><i class=""></i>Formaciones: $num </span></li>
+						<li>|</li>
+						<span><i class=""></i> Experiencias: $num</span>
+					
+						<li>
+						<!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+						<span><i class="fa fa-facebook-square"></i></span>
+						<span><i class="fa fa-twitter-square"></i></span>
+						<span><i class="fa fa-google-plus-square"></i></span>
+						</li>
+						</ul>
+				</div>
+				</div>
+			</div>
+
+
+<?php
+		}
+		echo "</div>";
+	}else{
+		echo "<h3>No se encontraron Curriculums</h3>";
+	}
+	//con el array recibido hacer foreach e imprimir cajas con link que lleven a la pagina
+	//que mostrará el curriculum de la persona
+	}
+
 
 function passerrors(){
 	if(isset($_GET['passch'])){

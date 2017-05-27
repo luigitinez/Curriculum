@@ -13,6 +13,10 @@
     color:#fff;
     z-index:99999;
 }
+img.media-object {
+    width: 200px;
+    height: 200px;
+}
 .container{
     margin-bottom: 10px;
 }
@@ -97,6 +101,13 @@
         background-color: inherit;
         border-top:0 none;
     }
+    img.media-object {
+    width: 150px;
+    height: 150px;
+}
+.descripcion{
+    display:none;
+}
 
    .navbar-nav>li>a{
        text-align: center;

@@ -15,7 +15,7 @@ session_start();
 <center>
 <div class="container">
 <h1>Bienvenido a <i>Curriculum</i></h1>
-	
+	<?php mostrarcv();?>
 </div>
 
 </center>
