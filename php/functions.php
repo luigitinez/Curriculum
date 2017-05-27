@@ -219,11 +219,11 @@ function removeOld_Pic($result){//borra del servidor la imagen que pertenecia al
 				unlink("../".$_SESSION['usr']->getpic());
 			//en deploy ->		unlink("/".$_SESSION['usr']->getpic());
 			}else{
-				
+				//die($_SESSION['usr']->getpic());
 			}
-		}
-	}
-}
+		}//cierre if strcmp
+	}//cierre if inicial
+}//cierre funcion
 
 function backdefault(){//hace que el usuario vuelva a tener la foto por defecto
 	$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$_SESSION['usr']->getid());
