@@ -108,7 +108,7 @@ function mostrarusuarios(){
 					<td><?= $value->getmail();?></td>
 					<td class="hidden-xs">Cliente</td>
 					<td><?= $value->getprof();?></td>
-					<td> <a href=<?= "'".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>></a></td>
+					<td> <a href=<?= "'media/usrimg/".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?=  "'media/usrimg/".$value->getpic()."'" ?>></a></td>
 					<td><form method="POST" action="php/eraseusr.php"> <input type="submit" class="btn btn-danger" value="borrar" name=<?= $value->getid();?>></form></td>
 				</tr>
 
