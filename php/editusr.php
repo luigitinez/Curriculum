@@ -45,11 +45,8 @@ if(isset($_POST['submit'])){
 }else{
     turnback();
 }
-<<<<<<< HEAD
 
-=======
 //turnback();
->>>>>>> a822d63fdb5638ccdd400e13577b63a20f6904b5
 /*if(isset($_SESSION['tmp_img'])){
     print_r($_SESSION['tmp_img']);
 }*/
