@@ -1,9 +1,9 @@
 <?php
 
 function conectar(){
-   // @$connect = new mysqli("localhost","root","root","curriculum");
+    @$connect = new mysqli("localhost","root","root","curriculum");
   //  @$connect = new mysqli("danigody001.mysql.guardedhost.com","danigody001_luismg","qqC-9kU-2LB-pS8","danigody001_cvproject");
-    @$connect = new mysqli("localhost","root","","curriculum");
+   // @$connect = new mysqli("localhost","root","","curriculum");
     if($connect->connect_errno){
        printf("<h1><span>LA CONEXIÓN CON LA BASE DE DATOS HA FALLADO: %s\n".$connect->connect_error."</span></h1>");
        exit();
@@ -107,6 +107,40 @@ function listar(){
 
 
 }
+
+function listarformaciones($id_usr)
+{
+
+    $conn = conectar();
+    $select = "SELECT `id_exp`, `fecha_ini`,`fecha_fin`,`lugar`,`tipo_for` FROM `formacion` WHERE `FK_id_usr` = ".$id_usr;
+     $result = $conn->query($select);
+    if ($result->num_rows > 0) {
+        $profesiones=array();
+        $i=0;
+        $usuarios=array();
+        while($row = $result->fetch_assoc()) {
+            /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
+            Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
+            $usuarios[$i]=new forex();
+            $usuarios[$i]->setplace($row['id_exp']);
+            $usuarios[$i]->setplace($row['lugar']);
+            $usuarios[$i]->setjob($row['tipo_for']);
+            $usuarios[$i]->setinit_date($row['fecha_ini']);
+            $usuarios[$i]->setend_date($row['fecha_fin']);
+
+            
+            $i++;
+        }
+        $conn->close();        
+        return $usuarios;
+    } else {
+        $conn->close();    
+        return false;
+    }
+
+
+}
+
 function listprof($select){
     $conn=conectar();
      $result = $conn->query($select);
