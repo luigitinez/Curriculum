@@ -38,8 +38,29 @@ function regusr($mail,$pass,$name,$surname){
     $sqlins="INSERT INTO `usr`( `mail`, `pass`, `name`, `surname`) VALUES ('".$mail."','".$pass."','".$name."','".$surname."')";
     $mysqli=conectar();
     if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
+        $mysqli->close();
         return true;
     } else {//devolver error catastrofico
+        $mysqli->close();
+        return false;
+        //registrar en el log el error de base de datos //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+function addformex($table,$place,$prof,$ini,$end,$id){
+    if(strcasecmp($table,"formacion")==0){
+        $tipo="tipo_for";
+    }else{
+        $tipo="profesion";
+    }
+    $sqlins="INSERT INTO `".$table."`( `lugar`, `".$tipo."`, `fecha_ini`, `fecha_fin`, `FK_id_usr`) 
+    VALUES ('".$place."','".$prof."','".$ini."','".$end."','".$id."')";
+    $mysqli=conectar();
+    if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
+        $mysqli->close();
+        return true;
+    } else {//devolver error catastrofico
+        $mysqli->close();
         return false;
         //registrar en el log el error de base de datos //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -122,9 +143,42 @@ function listarformaciones($id_usr)
             /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
             Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
             $usuarios[$i]=new forex();
-            $usuarios[$i]->setplace($row['id_exp']);
+            $usuarios[$i]->setid($row['id_exp']);
             $usuarios[$i]->setplace($row['lugar']);
             $usuarios[$i]->setjob($row['tipo_for']);
+            $usuarios[$i]->setinit_date($row['fecha_ini']);
+            $usuarios[$i]->setend_date($row['fecha_fin']);
+
+            
+            $i++;
+        }
+        $conn->close();        
+        return $usuarios;
+    } else {
+        $conn->close();    
+        return false;
+    }
+
+
+}
+
+function listarexperiencias($id_usr)
+{
+
+    $conn = conectar();
+    $select = "SELECT `id_exp`, `fecha_ini`,`fecha_fin`,`lugar`,`profesion` FROM `experiencias` WHERE `FK_id_usr` = ".$id_usr;
+     $result = $conn->query($select);
+    if ($result->num_rows > 0) {
+        $profesiones=array();
+        $i=0;
+        $usuarios=array();
+        while($row = $result->fetch_assoc()) {
+            /*recorremos todas las profesiones y las metemos en un array, donde la key será el id y el nombre la posición 
+            Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
+            $usuarios[$i]=new forex();
+            $usuarios[$i]->setid($row['id_exp']);
+            $usuarios[$i]->setplace($row['lugar']);
+            $usuarios[$i]->setjob($row['profesion']);
             $usuarios[$i]->setinit_date($row['fecha_ini']);
             $usuarios[$i]->setend_date($row['fecha_fin']);
 
@@ -170,6 +224,20 @@ function listprof($select){
 function deleteusr($id){
     $conn = conectar();
     $del = "DELETE FROM `usr` WHERE `id_usr` =".$id;
+    if ($conn->query($del) === TRUE) {
+        //echo "Record deleted successfully";
+        return true;
+    } else {
+        //echo "Error deleting record: " . $conn->error;
+        return false;
+    }
+
+$conn->close();
+}
+
+function delforex($table,$id){
+    $conn = conectar();
+    $del = "DELETE FROM `".$table."` WHERE `id_exp` =".$id;
     if ($conn->query($del) === TRUE) {
         //echo "Record deleted successfully";
         return true;

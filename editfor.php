@@ -14,15 +14,27 @@ session_start();
 <body>
  <script>
   $( function() {
-    $( "#datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker({
+			 dateFormat: "yy-mm-dd"
+	});
   } );
   </script>
 <?php menu(); ?>
 
 <div class="container">
-	<h2>Formacion</h2>
-	<form action="" method="POST">
-		<legend>Añadir Formacion</legend>
+<?php
+	if(isset($_GET['empty'])){
+?>
+	<div class="alert alert-danger fade in">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	Quedaron campos vacios, no se relizo ninguna inserción
+	</div>
+<?php
+	}
+?>
+	<center><h2>Formación</h2></center>
+	<form action="php/editformex.php" method="POST">
+		<legend>Añadir Formación</legend>
 		<div class="form-group">
 				<label>Centro Formativo</label>
 				<input type="text" class="form-control" name="lugar" maxlength="100" placeholder="Lugar Formación">
@@ -32,12 +44,12 @@ session_start();
 				<input type="text" class="form-control" name="prof" maxlength="100" placeholder="Estudios Cursados">
 		</div>
 		<div class="form-group">
-				<label>Fecha de inicio de la Formacion</label>
-				<input type="text" class="form-control" placeholder='Fecha Inicio' data-provide="datepicker" id="datepicker">
+				<label>Fecha de inicio de la Formación</label>
+				<input type="text" class="form-control datepicker" name="ini" placeholder='Fecha Inicio' data-provide="datepicker">
 		</div>
 		<div class="form-group">
-				<label>Fecha de finalización de la Formacion</label>				
-				<input type="text" class="form-control" placeholder='Fecha Fin' id="datepicker">
+				<label>Fecha de finalización de la Formación</label>				
+				<input type="text" class="form-control datepicker" name="fin" placeholder='Fecha Fin'>
 		</div>
 		<div class="form-group">
 				<?php hiddenusr(); ?>
@@ -52,7 +64,7 @@ session_start();
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Centro Formativo</th>
-                <th>Profesion Ejercida</th>
+                <th>Estudios Cursados</th>
                 <th></th>
             </tr>
         </thead>

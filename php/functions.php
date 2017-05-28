@@ -136,7 +136,28 @@ function mostrarformaciones(){
 					<td><?= $value->getinit_date() ?></td>
 					<td><?= $value->getplace() ?> </td>
 					<td><?= $value->getjob() ?> </td>
-					<td><form method="POST" action="php/eraseusr.php"> <input type="submit" class="btn btn-danger" value="borrar" name=<?= $value->getid();?>></form></td>
+					<td><form method="POST" action="php/editformex.php"><input type="hidden" name="id" value=<?= $value->getid();?> >  <input type="submit" class="btn btn-danger" value="borrar" name="formdel"></form></td>
+				</tr>
+<?php
+		
+		}//cierre foreach
+	}//cierre if
+}//fin funcion
+
+function mostrarexperiencias(){
+
+
+	$forms=listarexperiencias($_SESSION['usr']->getid());
+	if($forms!=false){
+		foreach($forms as $key => $value){
+		
+?>
+				<tr class="">
+					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getplace() ?> </td>
+					<td><?= $value->getjob() ?> </td>
+					<td><form method="POST" action="php/editformex.php"><input type="hidden" name="id" value=<?= $value->getid();?> >  <input type="submit" class="btn btn-danger" value="borrar" name="expdel"></form></td>
 				</tr>
 <?php
 		
@@ -185,13 +206,13 @@ function checkdel(){
 		if($_GET['del']==true){//usuario borrado con exito
 ?>
 			<div class="alert alert-success">
-    			<strong>Éxito!</strong> El usuario se eliminó con éxito.
+    			<strong>Éxito!</strong> Se eliminó con éxito el registro.
   			</div>
 <?php
 		}else{//usuario no fue borrado
 ?>
 			<div class="alert alert-warning">
- 				<strong>Error!</strong> No se pudo borrar el usuario de la base de datos.
+ 				<strong>Error!</strong> No se pudo borrar el registro de la base de datos.
 			</div>
 
 <?php
