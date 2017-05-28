@@ -3,6 +3,7 @@ include_once "MySQLDataSource.php";
 include_once "class/objetousuario.php";
 include_once "class/objetoprofesion.php";
 include_once "class/objetocv.php";
+include_once "class/objetoforex.php";
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];
@@ -82,6 +83,9 @@ function makeselect(){
 <?php
 	}
 }
+function hiddenusr(){
+echo "<input type='hidden' name='user' value='{$_SESSION['usr']->getid()}'>";
+}
 
 function mostrarusuarios(){
 
@@ -118,6 +122,27 @@ function mostrarusuarios(){
 		}//cierre foreach
 	}//cierre if
 }
+
+function mostrarformaciones(){
+
+
+	$forms=listarformaciones($_SESSION['usr']->getid());
+	if($forms!=false){
+		foreach($forms as $key => $value){
+		
+?>
+				<tr class="">
+					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getplace() ?> </td>
+					<td><?= $value->getjob() ?> </td>
+					<td><form method="POST" action="php/eraseusr.php"> <input type="submit" class="btn btn-danger" value="borrar" name=<?= $value->getid();?>></form></td>
+				</tr>
+<?php
+		
+		}//cierre foreach
+	}//cierre if
+}//fin funcion
 
 function mostrarprofesiones(){
 	//hacer consulta a la bbdd
