@@ -15,8 +15,10 @@ if(isset($_POST['submit'])){
         }else{//la contraseña se ha posteado y esta correctamente
             if($img){//actualizamos imagen y contraseña
                 editprofile(4);
+                turnback("passch=".$resultpass);
             }else{//actualizamos solo la contraseña
                 editprofile(3);
+                turnback("passch=".$resultpass);
             }
         }
     }else{
@@ -25,22 +27,24 @@ if(isset($_POST['submit'])){
         $img=checkimg();
         if ($img){//se ha posteado imagen
                 editprofile(1);
+                turnback();
         }else {
-            if($prof)
-                editprofile(0);
-            else
+            if ($prof) {
+                editprofile(0); 
+                turnback("edit=true");
+            } else {
                 turnback("edit=false");
+            }
         }
        //si no se ha posteado imagen y prof==false no hacer nada sino actualizar profesion
     }
 }elseif(isset($_POST['default'])){
     backdefault();
-    
-
+    turnback();
 }else{
     turnback();
 }
-turnback();
+
 /*if(isset($_SESSION['tmp_img'])){
     print_r($_SESSION['tmp_img']);
 }*/
