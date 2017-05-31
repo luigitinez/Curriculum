@@ -4,6 +4,7 @@ include_once "class/objetousuario.php";
 include_once "class/objetoprofesion.php";
 include_once "class/objetocv.php";
 include_once "class/objetoforex.php";
+include_once "class/objetomail.php";
 function geturl($navdir=""){
 	if($navdir=="")
 	$dir=$_SERVER['PHP_SELF'];
@@ -86,6 +87,20 @@ function makeselect(){
 function hiddenusr(){
 echo "<input type='hidden' name='user' value='{$_SESSION['usr']->getid()}'>";
 }
+function mostrarMail(){
+	$inbox = verbandeja();
+	if($inbox){
+		foreach ($inbox as $key => $value) {
+?>
+		<tr><td>Nombre: <?=$value->getname() ?> </td> <td>Correo: <?=$value->getcorreo() ?> </td><td><form method = "POST" action = ""><button class="btn btn-danger pull-right">borrar mensaje</button> </form></td> </tr>
+		<tr><td colspan="3">Mensaje:<br><br><?=$value->getmessage() ?></td></tr>
+
+<?php
+	}
+}else{
+		echo "<script>alert('No hay correos, la bandeja está vacia.');</script>";
+	}
+}	
 
 function mostrarusuarios(){
 
@@ -100,7 +115,7 @@ function mostrarusuarios(){
 					<td><?= $value->getmail();?></td>
 					<td class="hidden-xs">Administrador</td>
 					<td><?= $value->getprof();?></td>
-					<td> <a href=<?= "'".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'".$_SESSION['usr']->getpic()."'"; ?>></a> </td>
+					<td> <a href=<?= "'media/usrimg/".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?= "'media/usrimg/".$value->getpic()."'" ?>></a> </td>
 					<td></td>
 				</tr>
 <?php 
@@ -113,6 +128,7 @@ function mostrarusuarios(){
 					<td class="hidden-xs">Cliente</td>
 					<td><?= $value->getprof();?></td>
 					<td> <a href=<?= "'media/usrimg/".$value->getpic()."'"; ?> class="pull-right" target="_blank"><img class="img-icon" src=<?=  "'media/usrimg/".$value->getpic()."'" ?>></a></td>
+					<td><input type="submit" class="btn btn-warning edituser" value="editar" data-id="<?= $value->getid();?>"></td>
 					<td><form method="POST" action="php/eraseusr.php"> <input type="submit" class="btn btn-danger" value="borrar" name=<?= $value->getid();?>></form></td>
 				</tr>
 
@@ -271,8 +287,12 @@ function removeOld_Pic($result){//borra del servidor la imagen que pertenecia al
 	}//cierre if inicial
 }//cierre funcion
 
-function backdefault(){//hace que el usuario vuelva a tener la foto por defecto
-	$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$_SESSION['usr']->getid());
+function backdefault($id=0){//hace que el usuario vuelva a tener la foto por defecto
+	if($id==0){
+		$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$_SESSION['usr']->getid());
+	}else{
+		$result=makeupdate("UPDATE `usr` SET `pic`='default.jpg' WHERE `id_usr`=".$id);
+	}
 	removeOld_Pic($result);
 	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
 	return $result;
@@ -376,6 +396,11 @@ function sendWelcomeMail($mail,$fullname){
 	$from	 = "From: info@cvproject.tk";
 	$headers = "-f info@cvproject.tk";
 	mail($mail,$subject,$message,$from,$headers);
+}
+function sendAdminMail(){
+	$message = $_POST['message']."\n Su telefono es: ".$_POST['tel'];
+	$result=insertMail($_POST['name'],	$_POST['mail'],$message,6);
+	return $result;
 }
 
 function mostrarcv(){

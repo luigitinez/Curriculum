@@ -14,11 +14,24 @@ session_start();
 <?php menu(); ?>
 <div class="container">
 <?php
-if(isset($_POST)){
-    //checkforsend($_POST);
-   /* foreach ($_POST as $key => $value) {
-        echo $key." ".$value."<br>";
-    }*/
+if(isset($_POST['enviar'])){
+    //si se ha echo post se intenta enviar un correo al administrador (hacer un registro dentro de la bbdd)
+    $result=sendAdminMail();
+    //dependiendo de si se hizo con exito el envio del mail
+    if($result){
+?>
+        <div class="alert alert-success">
+            <strong>Exito!</strong> El correo se envió correctamente al administrador.
+        </div>
+<?php
+    }else{
+?>
+        <div class="alert alert-warning">
+            <strong>Error!</strong> El correo no pudo ser enviado, pruebe más tarde.
+        </div>
+<?php
+    }
+
 }
 ?>
 
@@ -55,7 +68,7 @@ if(isset($_POST)){
                 <label>Mensaje</label>
             </div>
             <div class="group">
-                <center><button type="submit" class="btn btn-warning">Enviar <span class="glyphicon glyphicon-send"></span></button></center>
+                <center><button type="submit" name="enviar" class="btn btn-warning">Enviar <span class="glyphicon glyphicon-send"></span></button></center>
             </div>
         </form>
 
