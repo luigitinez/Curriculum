@@ -12,8 +12,34 @@ function conectar(){
     }
 }
 
+function verbandeja(){
+    $conn  = conectar();
+    $query = "SELECT * FROM `mail` WHERE `FK_id_usr` = ".$_SESSION['usr']->getid();
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        $correos=array();
+        $i=0;
+        while($row = $result->fetch_assoc()) {
+            /*recorremos todas los correos en al bandeja del usuario y los metemos en un array, donde la key será el id y el nombre la posición 
+            Esto lo hacemos por si se borra alguna profesion y la secuencia de ids no es continua no provoque errores*/
+            $correos[$i] = new mail();
+            
+            $correos[$i]->setid($row['id']);
+            $correos[$i]->setcorreo($row['correo']);
+            $correos[$i]->setname($row['name']);
+            $correos[$i]->setmessage($row['message']);
+            $correos[$i]->setid_usr($row['FK_id_usr']);  
+            $i++ ;      
+        }
+        return $correos;
+    } else {
+        return false;
+    }
+    $conn->close();
+}
+
 function usrexists ($mail){
-    $enlace= conectar();
+    $enlace = conectar();
     //generamos una consulta para enviar a la bbdd
         //    SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = 'lmgspain@hotmail.com'
   $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
@@ -32,6 +58,37 @@ function usrexists ($mail){
             return $result;//usuario existe
         }
     }
+}
+function usrconsult ($id){
+    $enlace = conectar();
+    //generamos una consulta para enviar a la bbdd
+  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion`
+   FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.id_usr = '".$id."'";
+  if(!$result =$enlace->query($query)){
+   //la consulta no se ha realizado con exito
+   $mysqli->close();
+   return false;
+
+  }else {
+        if ($result->num_rows === 0) {
+            $enlace->close();
+            return false;//la consulta ha devuelto 0 filas, no existe el usuario
+        }else{
+            $enlace->close();
+            $ajaxAnsw='';
+            $row = $result->fetch_assoc();
+            
+            return $row;//usuario existe
+        }
+    }
+}
+function usr_update($config){
+    $sql = "UPDATE `usr` SET `mail`='".$config['mail']."',`name`='".$config['name']."',`surname`='".$config['surname']."' WHERE id_usr =".$config['id'] ;
+    
+    $result = makeupdate($sql);
+
+    return $result;
+
 }
 
 function regusr($mail,$pass,$name,$surname){
@@ -301,6 +358,19 @@ function makeupdate($upd){
 }
 function addprof($name){
     $sqlins="INSERT INTO `profesion`(`nombre_profesion`) VALUES ('".$name."')";
+    $mysqli=conectar();
+    if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
+        $mysqli->close();
+        return true;
+    } else {//devolver error catastrofico
+        $mysqli->close();        
+        return false;
+        //registrar en el log el error de base de datos //echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+function insertMail($name,$mail,$message,$idusr){
+    $sqlins="INSERT INTO `mail`(`correo`, `name`, `message`, `FK_id_usr`) VALUES ('".$mail."','".$name."','".$message."','".$idusr."')";
     $mysqli=conectar();
     if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
         $mysqli->close();

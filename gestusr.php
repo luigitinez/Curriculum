@@ -34,8 +34,142 @@ session_start();
         <?php mostrarusuarios(); ?>
         </tbody>
     </table>
+
+    <!--MODAL EDIT-->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Editar</h4>
+	      </div>
+	      <div class="modal-body">
+           <form class="form-horizontal" role="form">
+
+          <div id="data-modal">
+          </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="button" id="actualizar" class="btn btn-info">Actualizar</button>
+                    </div>
+                  </div>
+
+           </form>
+           <form action="" method="POST" >
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-succes">Reiniciar Contraseña</button>
+                    </div>
+                  </div>
+
+           </form>
+                      
+        <form action="" method="POST" >
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" id="defpic" class="btn btn-primary">Default Pic</button>
+                    </div>
+                  </div>
+
+           </form>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+	<!--FIN-->
+
 </div>
 
 </center>
+<script type="text/javascript">
+        function catchUserAjax(val1){
+            var par = {
+                'id' : val1,
+                'type':'mostrar'
+            };
+            $.ajax({
+                data: par,
+                url: 'php/ajax_edit.php',
+                type: 'post',
+                datatype: 'html',
+                success: function(data){
+                    $('#data-modal').html(data);
+                },
+                error: function(xhr,status){
+                    console.log(xhr.responseText);
+                }
+            });
+            
+        }
+
+        function editUserAjax(val1,nombre,apellido,mail){
+            var par = {
+                'id' : val1,
+                'type' : 'edit',
+                'name' : nombre,
+                'surname': apellido,
+                'mail':mail
+            };
+            $.ajax({
+                data: par,
+                url: 'php/ajax_edit.php',
+                type: 'post',
+                datatype: 'html',
+                success: function(data){
+
+                },
+                error: function(xhr,status){
+                    console.log(xhr.responseText);
+                }
+            });
+            
+        }
+        function backdefault(val1){
+            var par = {
+                'id' : val1,
+                'type':'passwd'
+            };
+            $.ajax({
+                data: par,
+                url: 'php/ajax_edit.php',
+                type: 'post',
+                datatype: 'html',
+                success: function(data){
+                },
+                error: function(xhr,status){
+                    console.log(xhr.responseText);
+                }
+            });
+            
+        }
+
+		$(".edituser").on("click",function(){
+            var id=$(this).data("id");
+            catchUserAjax(id);
+            $('#myModal').modal('show'); 
+		});
+        $("#actualizar").on("click",function(){
+            var id=$("#id-edit").val();
+            var nombre=$(".input-name").val();
+            var apellido=$(".input-surname").val();
+            var mail=$(".input-mail").val();
+
+            editUserAjax(id,nombre,apellido,mail);
+            location.reload(true);
+        });
+        $("#defpic").on("click",function(){
+            var id=$("#id-edit").val();
+
+            backdefault(id);
+            location.reload(true);
+        });
+</script>
 </body>
 </html>
