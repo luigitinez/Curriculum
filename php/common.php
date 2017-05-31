@@ -19,23 +19,28 @@ function menu(){
 <?php
   //index.php or controller
   //array que contiene todas las paginas que aparecen en el menu 
-  $pages = array("index.php"=>"HOME","contact.php"=>"Contactenos");
+  $pages = array("index.php"=>"HOME");
   
   $activePage = geturl();
  if(isset($_SESSION['usr'])){
+      $pages['mail.php']       ="Correo";
    if($_SESSION['usr']->getkarma()==0){
         //aqui los links exclusivos del usuario logged
-      $pages['editexp.php']       ="Experiencias";
-      $pages['editfor.php']       ="Formacion";
-      $pages['edit.php']          ="Editar Perfil";
-   }else{
+      $pages['editexp.php']       = "Experiencias";
+      $pages['editfor.php']       = "Formacion";
+      $pages['edit.php']          = "Editar Perfil";
+      $pages["contact.php"]       = "Contactenos";
+      
+   }else{ 
       $pages['gestusr.php']       = "Gestionar Usuarios";
       $pages['profesiones.php']   = "Gestion Profesiones";
    }
  
  }else{
    //aqui los links exclusivos del usuario invitado
-   $pages['reg.php']="Registro";
+   $pages['reg.php']              = "Registro";
+   $pages["contact.php"]          = "Contactenos";
+   
  }
 ?>
 
