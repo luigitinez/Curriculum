@@ -74,5 +74,7 @@ session_start();
     </table>
 
 </div>
+
+<script type="text/javascript" src="js/del.js"></script>
 </body>
 </html>
