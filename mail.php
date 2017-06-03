@@ -8,6 +8,16 @@ session_start();
 <head>
 	<title>Gestion Usuarios</title>
 	<?php styles(); ?> 
+<style type="text/css">
+    td, th {
+
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 </head>
 <body>
 <?php menu(); ?>
@@ -32,3 +42,7 @@ session_start();
         <?php mostrarMail(); ?>
         </tbody>
     </table>
+</div>
+<script type="text/javascript" src="js/del.js"></script>
+</body>
+</html>

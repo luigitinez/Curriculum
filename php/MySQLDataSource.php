@@ -14,7 +14,7 @@ function conectar(){
 
 function verbandeja(){
     $conn  = conectar();
-    $query = "SELECT * FROM `mail` WHERE `FK_id_usr` = ".$_SESSION['usr']->getid();
+    $query = "SELECT * FROM `mail` WHERE `FK_id_usr` = ".$_SESSION['usr']->getid()." order by id desc" ;
     $result = $conn->query($query);
     if ($result->num_rows > 0) {
         $correos=array();
@@ -59,6 +59,8 @@ function usrexists ($mail){
         }
     }
 }
+
+
 function usrconsult ($id){
     $enlace = conectar();
     //generamos una consulta para enviar a la bbdd
@@ -75,7 +77,6 @@ function usrconsult ($id){
             return false;//la consulta ha devuelto 0 filas, no existe el usuario
         }else{
             $enlace->close();
-            $ajaxAnsw='';
             $row = $result->fetch_assoc();
             
             return $row;//usuario existe

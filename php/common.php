@@ -122,7 +122,7 @@ function menu(){
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><?= $_SESSION['usr']->getname(); ?></b> <span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $_SESSION['usr']->getmail(); ?></a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="viewusr.php?id=<?= $_SESSION['usr']->getid()?>"><?= $_SESSION['usr']->getmail(); ?></a></li>
       <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $_SESSION['usr']->getprof()?></a></li>
       <li role="presentation" class="divider"></li>
       <li role="presentation"><a role="menuitem" tabindex="-1" href="php/logout.php">LogOut</a></li>

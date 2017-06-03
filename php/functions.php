@@ -139,10 +139,13 @@ function mostrarusuarios(){
 	}//cierre if
 }
 
-function mostrarformaciones(){
+function mostrarformaciones($id=""){
 
-
-	$forms=listarformaciones($_SESSION['usr']->getid());
+	if(empty($id)){
+		$forms=listarformaciones($_SESSION['usr']->getid());
+	}else{
+		$forms=listarformaciones($id);
+	}
 	if($forms!=false){
 		foreach($forms as $key => $value){
 		
@@ -152,18 +155,33 @@ function mostrarformaciones(){
 					<td><?= $value->getinit_date() ?></td>
 					<td><?= $value->getplace() ?> </td>
 					<td><?= $value->getjob() ?> </td>
-					<td><form method="POST" action="php/editformex.php"><input type="hidden" name="id" value=<?= $value->getid();?> >  <input type="submit" class="btn btn-danger" value="borrar" name="formdel"></form></td>
+<?php 			if(empty($id)) {?>
+					<td><form method="POST" action="php/editformex.php"><input type="hidden" name="id" value=<?= $value->getid();?> >  <input type="submit" class="btn btn-danger" value="borrar
+" name="formdel"></form></td>
+				<? } ?>
 				</tr>
 <?php
 		
 		}//cierre foreach
+	}else{
+		echo "<tr><td colspan='4'><div class='alert alert-info'>
+  				<strong>No se encontraron registros</strong>
+				</div><td><tr>";
 	}//cierre if
 }//fin funcion
 
-function mostrarexperiencias(){
+function nocvusr(){
+	header('Location: http://'.$_SERVER['HTTP_HOST'].'/404.php'); 
+}
 
+function mostrarexperiencias($id=""){
 
-	$forms=listarexperiencias($_SESSION['usr']->getid());
+	if(empty($id)){
+		$forms=listarexperiencias($_SESSION['usr']->getid());
+	}else{
+		$forms=listarexperiencias($id);
+		
+	}
 	if($forms!=false){
 		foreach($forms as $key => $value){
 		
@@ -173,11 +191,17 @@ function mostrarexperiencias(){
 					<td><?= $value->getinit_date() ?></td>
 					<td><?= $value->getplace() ?> </td>
 					<td><?= $value->getjob() ?> </td>
+<?php 			if(empty($id)){ ?>
 					<td><form method="POST" action="php/editformex.php"><input type="hidden" name="id" value=<?= $value->getid();?> >  <input type="submit" class="btn btn-danger" value="borrar" name="expdel"></form></td>
+<?php 			}	?>			
 				</tr>
 <?php
 		
 		}//cierre foreach
+	}else{
+		echo "<tr><td colspan='4'><div class='alert alert-info'>
+  <strong>No se encontraron registros</strong>
+</div><td><tr>";
 	}//cierre if
 }//fin funcion
 
@@ -410,10 +434,10 @@ function mostrarcv(){
 		foreach ($cvs as $key => $value) {
 ?>
 
-
+					
 			<div class="well">
 				<div class="media">
-					<a class="pull-left" href="#">
+					<a class="pull-left" href="viewusr.php?id=<?=$value->getid()?>">
 						<img class="media-object" src=<?= $value->getpic(); ?>>
 					</a>
 					<div class="media-body">
