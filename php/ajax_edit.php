@@ -38,11 +38,21 @@ if($_POST["type"]=="mostrar"){
     }else{
         return false;
     }
-}elseif($_POST["type"]=="passwd"){
+}elseif($_POST["type"]=="defpic"){
     $id=$_POST["id"];
     if(backdefault($id)){
         return true;
     }else{
         return false;
     }
+}elseif($_POST["type"]=="defpass"){
+    $id=$_POST["id"];
+    if(backpass($id)){
+        return true;
+    }else{
+        return false;
+    }
+}else{
+    print_r($_POST);
+    die();
 }

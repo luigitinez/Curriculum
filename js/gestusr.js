@@ -43,7 +43,27 @@
         function backdefault(val1){
             var par = {
                 'id' : val1,
-                'type':'passwd'
+                'type':'defpic'
+            };
+            $.ajax({
+                data: par,
+                url: 'php/ajax_edit.php',
+                type: 'post',
+                datatype: 'html',
+                success: function(data){
+                },
+                error: function(xhr,status){
+                    console.log(xhr.responseText);
+                }
+            });
+            
+        }
+
+
+        function backpass(val1){
+           var par = {
+                'id' : val1,
+                'type':'defpass'
             };
             $.ajax({
                 data: par,
@@ -75,7 +95,12 @@
         });
         $("#defpic").on("click",function(){
             var id=$("#id-edit").val();
-
             backdefault(id);
+            location.reload(true);
+        });
+        $("#defpass").on("click",function(){
+            var id=$("#id-edit").val();
+
+            backpass(id);
             location.reload(true);
         });

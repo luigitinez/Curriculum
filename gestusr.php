@@ -46,46 +46,42 @@ session_start();
 	      </div>
 	      <div class="modal-body">
            <form class="form-horizontal" role="form">
-
+        <!-- Esto imprime los campos con uss values segun el usr-->
           <div id="data-modal">
           </div>
-
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <button type="button" id="actualizar" class="btn btn-info">Actualizar</button>
                     </div>
                   </div>
-
            </form>
+           <div class="row">
            <form action="" method="POST" >
-                <div class="form-group">
+                <div class="form-group pull-left">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-succes">Reiniciar Contraseña</button>
+                      <button type="button" id="defpass" class="btn btn-success">Reiniciar Pollas</button>
                     </div>
-                  </div>
-
+                </div>
            </form>
                       
         <form action="" method="POST" >
-                <div class="form-group">
+                <div class="form-group pull-left">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" id="defpic" class="btn btn-primary">Default Pic</button>
+                      <button type="button" id="defpic" class="btn btn-primary">Default Pic</button>
                     </div>
                   </div>
 
            </form>
-
+           </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 
-	  </div>
-	</div>
 	<!--FIN-->
 
-</div>
+
 
 </center>
 <script type="text/javascript" src="js/del.js"></script>
