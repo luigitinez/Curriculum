@@ -70,9 +70,9 @@ menu();
       </div>
       
       <?php  ?>
-      <div class="bs-callout bs-callout-danger">
-        <h4>Experiencias Laborales</h4>
-        <table class="table table-striped table-responsive ">
+  <div class="bs-callout bs-callout-danger">
+     <h4>Experiencias Laborales</h4>
+     <table class="table table-striped table-responsive ">
         <thead>
             <tr>
                 <th>Fecha Inicio</th>
@@ -86,27 +86,56 @@ menu();
         <?php mostrarexperiencias($_GET['id']); ?>
         </tbody>
     </table>
-      </div>
-      <div class="bs-callout bs-callout-danger">
-        <h4>Formación Académica</h4>
-        <table class="table table-striped table-responsive ">
-                <thead>
-            <tr>
-                <th>Fecha Inicio</th>
-                <th>Fecha Fin</th>
-                <th>Centro Formativo</th>
-                <th>Estudios Cursados</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-          <?php mostrarformaciones($_GET['id']); ?>
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="bs-callout bs-callout-danger">
+    <h4>Formación Académica</h4>
+    <table class="table table-striped table-responsive ">
+            <thead>
+        <tr>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Centro Formativo</th>
+            <th>Estudios Cursados</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php mostrarformaciones($_GET['id']); ?>
+      </tbody>
+    </table>
+  </div>
+  <div class="bs-callout bs-callout-danger" id="contacto">
+  <?php
+if(isset($_GET['empty'])){
+  echo "<div class='alert alert-warning'>
+        <strong>Atención!</strong> Se olvidó campos por completar
+        </div>";
+}
+  ?>
+  <h2>Contacto</h2>
+  <form action="php/sendmail.php" method="POST">
+
+  	 <div class="form-group">
+      <label for="email">Name:</label>
+      <input type="text" class="form-control" name="nombre" id="name" placeholder="Escriba su nombre" required>
     </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Su correo email" required>
+    </div>
+    <div class="form-group">
+      <label style="vertical-align: top">Contact:</label>
+      <textarea class="form-control" rows="5" name="mensaje" id="comment" placeholder="Su mensaje aquí..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary pull-right" id="submit" name="submit"><i class="glyphicon glyphicon-envelope" ></i> Enviar</button><br>
+        <input type="hidden" name="url" value="<? echo "".geturl().""?>" >
+    <input type="hidden" name="id" value="<?= $_GET['id']?>">
+  </form>
+
 
   </div>
+</div>
+</div>  
 </div>
     
 </div>

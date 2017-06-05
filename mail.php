@@ -29,6 +29,15 @@ tr:nth-child(even) {
 <div class="container">
 <h1>Bandeja de Entrada</h1>
 <div class="container">
+<?php
+    if(isset($_GET['result'])){
+        if($_GET['result']==1){
+            echo "<div class='alert alert-success'><strong>Correo Borrado correctamente</strong></div>";
+        }else{
+            echo "<div class='alert alert-danger'><strong>Error, no se ha podido borrar el correo</strong></div>";
+        }
+    }
+?>
      <table class="table">
         <thead>
             <tr>

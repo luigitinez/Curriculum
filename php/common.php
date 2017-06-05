@@ -30,10 +30,11 @@ function menu(){
       $pages['editfor.php']       = "Formacion";
       $pages['edit.php']          = "Editar Perfil";
       $pages["contact.php"]       = "Contactenos";
+      $pages["pres.php"]          = "Presentación";
       
    }else{ 
-      $pages['gestusr.php']       = "Gestionar Usuarios";
-      $pages['profesiones.php']   = "Gestion Profesiones";
+      $pages['gestusr.php']       = "Usuarios";
+      $pages['profesiones.php']   = "Profesiones";
    }
  
  }else{
