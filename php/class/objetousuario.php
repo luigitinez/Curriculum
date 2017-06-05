@@ -14,6 +14,7 @@ class usuario{
     private $pic;//url foto
     private $name;
     private $surname;
+    private $presentacion;
 //no se añade descripcion porque seria muy pesado si hay que 
 //manejar múltiples objetos a la vez y es innecesaria
     //GETTERS
@@ -45,6 +46,9 @@ class usuario{
     function getkarma(){
         return $this -> karma;
     }
+    function getpresentacion(){
+        return $this -> presentacion;
+    }
 
     //SETTERS
     function setmail($nick){
@@ -69,10 +73,13 @@ class usuario{
         $this -> name = $name;
     }
      function setsurname($surname){
-        $this -> surname =$surname;
+        $this -> surname = $surname;
     }
     function setkarma($karma){
-        $this -> karma =$karma;
+        $this -> karma = $karma;
+    }
+    function setpresentacion($presentacion){
+        $this -> presentacion = $presentacion;
     }
 
     function refresh(){
@@ -82,6 +89,7 @@ class usuario{
             $_SESSION['usr']->setpass($linea['pass']);
             $_SESSION['usr']->setprof($linea['nombre_profesion']);
             $_SESSION['usr']->setpic('media/usrimg/'.$linea['pic']);
+            $_SESSION['usr']->setpresentacion($linea['presentacion']);
 
         }
 

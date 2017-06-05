@@ -43,6 +43,7 @@ else{
             $_SESSION['usr']->setname($linea['name']);
             $_SESSION['usr']->setsurname($linea['surname']);
             $_SESSION['usr']->setkarma($linea['admin']);
+            $_SESSION['usr']->setpresentacion($linea['presentacion']);
        
           
         /*---------------------------------------------------------*/

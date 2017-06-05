@@ -22,26 +22,31 @@ function geturl($navdir=""){
 			$params="?".$params;
 		}
 		$actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];//link de la pagina en la que nos encontramos ahora mismo
-		if(strpos($_SERVER['HTTP_REFERER'],"?")===false){//miramos si la pagina anterior tiene un get
-			if(strcmp($actual_link,$_SERVER['HTTP_REFERER'])==0){//si la pagina anterior es la misma que la actual (hay que replicarla al otro else por si lleva parámetros la funcion)
-				header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 
-			}else{
-					//miramos si la anterior pagina es reg.php
-				$pos=strrpos($_SERVER['HTTP_REFERER'],'/');//buscamos donde está la ultima barra
-				$actual_page=substr($_SERVER['HTTP_REFERER'],$pos);
-				if(strcmp($actual_page,"reg.php")===0){
-
-					header('Location: http://' . $_SERVER['HTTP_HOST'] . $params); 	
-
+		if(isset($_SERVER['HTTP_REFERER'])){
+			if(strpos($_SERVER['HTTP_REFERER'],"?")===false){//miramos si la pagina anterior tiene un get
+				if(strcmp($actual_link,$_SERVER['HTTP_REFERER'])==0){//si la pagina anterior es la misma que la actual (hay que replicarla al otro else por si lleva parámetros la funcion)
+					header('Location: http://'.$_SERVER['HTTP_HOST'].$params); 
 				}else{
+						//miramos si la anterior pagina es reg.php
+					$pos=strrpos($_SERVER['HTTP_REFERER'],'/');//buscamos donde está la ultima barra
+					$actual_page=substr($_SERVER['HTTP_REFERER'],$pos);
+					if(strcmp($actual_page,"reg.php")===0){
 
-					header('Location: '. $_SERVER['HTTP_REFERER'] . $params);
-				} 
+						header('Location: http://' . $_SERVER['HTTP_HOST'] . $params); 	
+
+					}else{
+
+						header('Location: '. $_SERVER['HTTP_REFERER'] . $params);
+					} 
+				}
+			}else{
+				$url=explode("?",$_SERVER['HTTP_REFERER']);
+				header('Location: '.$url[0].$params); 
 			}
 		}else{
-			$url=explode("?",$_SERVER['HTTP_REFERER']);
-			header('Location: '.$url[0].$params); 
+			header('Location: http://'.$_SERVER['HTTP_HOST'].$params);
 		}
+
 	}
 
 	function backlogged(){
@@ -63,21 +68,37 @@ function geturl($navdir=""){
 		}
 	}
 
-function makeselect(){
+function makeselect($index=""){
 	$values = profesiones();
 	if($values != false){
+		if(empty($index)){
 ?>
-	 
-	 <select class='form-control' name='prof'>
+	 		<select class='form-control' name='prof'>
 <?php
+		}else{
+?>
+			<select class='form-control' name="prof" onchange="this.form.submit()">
+<?php			
+		}
 		
 	foreach ($values as $key => $value) {
-		if(strcmp($value,$_SESSION['usr']->getprof())==0){
-			echo "<option selected='selected' value='".$key."'>$value</option>";
+		if(empty($index)){
+			if(strcmp($value,$_SESSION['usr']->getprof())==0){
+				echo "<option selected='selected' value='".$key."'>$value</option>";
+			}else{
+				echo "<option value='".$key."'>$value</option>";
+			}
 		}else{
-			echo "<option value='".$key."'>$value</option>";
-		}
-	}
+			if($key==0){
+				$value="Todos";
+			}
+			if(isset($_GET['prof'])&& $_GET['prof']==$key){
+				echo "<option selected='selected' value='".$key."'>$value</option>";
+			}else{
+				echo "<option value='".$key."'>$value</option>";
+			}
+		}//fin else empty index
+	}//fin foreach
 ?>
 	</select>
 
@@ -92,7 +113,7 @@ function mostrarMail(){
 	if($inbox){
 		foreach ($inbox as $key => $value) {
 ?>
-		<tr><td>Nombre: <?=$value->getname() ?> </td> <td>Correo: <?=$value->getcorreo() ?> </td><td><form method = "POST" action = ""><button class="btn btn-danger pull-right">borrar mensaje</button> </form></td> </tr>
+		<tr><td>Nombre: <?=$value->getname() ?> </td> <td>Correo: <?=$value->getcorreo() ?> </td><td><form method = "POST" action = "php/erasemss.php"><input type="hidden" name="id" value="<?=$value->getid() ?>"><button class="btn btn-danger pull-right">borrar mensaje</button> </form></td> </tr>
 		<tr><td colspan="3">Mensaje:<br><br><?=$value->getmessage() ?></td></tr>
 
 <?php
@@ -260,6 +281,12 @@ function checkdel(){
 
 	}
 }	
+function updpres($desc){
+		$update="UPDATE `usr` SET `presentacion`= '".$desc."' WHERE `id_usr`=".$_SESSION['usr']->getid();
+		$result=makeupdate($update);//intentamos hacer la actualizacion en la base de datos
+		return $result;//devolvemos el resultado de la consulta a la bbdd (el update de makeupdate)
+}
+
 
 function editprof($id,$newname){
 	$update="UPDATE `profesion` SET `nombre_profesion`= '".$newname."' WHERE `id_prof`=".$id;
@@ -320,6 +347,10 @@ function backdefault($id=0){//hace que el usuario vuelva a tener la foto por def
 	removeOld_Pic($result);
 	$_SESSION['usr']->refresh();//actualizamos el objeto usuario guardado en sesion con los datos de la bbdd
 	return $result;
+}
+function backpass($id){//hace que el usuario tenga la contraseña pass
+		$result=makeupdate("UPDATE `usr` SET `pass`='".md5('pass')."' WHERE `id_usr`=".$id);
+		return $result;
 }
 
 function checkprof(){
@@ -420,6 +451,18 @@ function sendWelcomeMail($mail,$fullname){
 	$from	 = "From: info@cvproject.tk";
 	$headers = "-f info@cvproject.tk";
 	mail($mail,$subject,$message,$from,$headers);
+}
+function sendUsrMail($id,$mailSender,$name,$message){
+	$usr = usrconsult($id);
+	$mail = $usr['mail'];
+	$from	 = "From: info@cvproject.tk";
+	$headers = "-f info@cvproject.tk";
+	//mensaje feedback para el emisor
+	mail($mailSender,"cvproject confirmacion envio","Le informamos que su mensaje ha sido enviado con éxito",$from,$headers);
+	//mensaje para el destnatario final
+	mail($mail,"Mensaje desde CVProject",$message,$from,$headers);
+	$result=insertMail($name, $mail, $message, $id);
+	return $result;
 }
 function sendAdminMail(){
 	$message = $_POST['message']."\n Su telefono es: ".$_POST['tel'];

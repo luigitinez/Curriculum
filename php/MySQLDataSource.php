@@ -41,8 +41,8 @@ function verbandeja(){
 function usrexists ($mail){
     $enlace = conectar();
     //generamos una consulta para enviar a la bbdd
-        //    SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = 'lmgspain@hotmail.com'
-  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
+    //    SELECT `mail`, `pass`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = 'lmgspain@hotmail.com'
+  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion`,`presentacion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.mail = '".$mail."'";
   //$query="SELECT * FROM `usr` WHERE `mail` = '".$mail."'";
   if(!$result =$enlace->query($query)){
    //la consulta no se ha realizado con exito
@@ -157,7 +157,7 @@ function profesiones(){
 function listar(){
 
     $conn = conectar();
-    $select = "SELECT `id_usr`, `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
+    $select = "SELECT `id_usr`, `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion`, FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
      $result = $conn->query($select);
     if ($result->num_rows > 0) {
         $profesiones=array();
@@ -292,6 +292,19 @@ function deleteusr($id){
 
 $conn->close();
 }
+function deletemss($id){
+      $conn = conectar();
+    $del = "DELETE FROM `mail` WHERE `id` =".$id;
+    if ($conn->query($del) === TRUE) {
+        //echo "Record deleted successfully";
+        return true;
+    } else {
+        //echo "Error deleting record: " . $conn->error;
+        return false;
+    }
+
+$conn->close();
+}
 
 function delforex($table,$id){
     $conn = conectar();
@@ -321,6 +334,11 @@ function deleteprof($id){
 function makecvs(){
     $conn  = conectar();
     $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
+    if(isset($_SESSION['cvprof'])){
+        $sql.= ' AND `FK_id_prof` ='. $_SESSION['cvprof'];
+        unset($_SESSION['cvprof']);
+        //die($sql);
+    }
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // recorremos la consulta
