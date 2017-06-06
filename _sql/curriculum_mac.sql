@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 31-05-2017 a las 23:30:39
+-- Tiempo de generación: 06-06-2017 a las 18:06:05
 -- Versión del servidor: 5.6.34
 -- Versión de PHP: 7.1.0
 
@@ -29,6 +29,13 @@ CREATE TABLE `experiencias` (
   `FK_id_usr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `experiencias`
+--
+
+INSERT INTO `experiencias` (`id_exp`, `lugar`, `profesion`, `fecha_ini`, `fecha_fin`, `FK_id_usr`) VALUES
+(8, 'poll', 'de la baca', '2017-06-09', '2017-06-03', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -50,7 +57,9 @@ CREATE TABLE `formacion` (
 
 INSERT INTO `formacion` (`id_exp`, `fecha_ini`, `fecha_fin`, `lugar`, `tipo_for`, `FK_id_usr`) VALUES
 (2, '05/28/2017', '05/31/2017', 'IES Son Ferrer', 'DAW', 3),
-(4, '2017-05-28', '2017-05-31', 'IES Son Ferrer', 'Medico', 3);
+(4, '2017-05-28', '2017-05-31', 'IES Son Ferrer', 'Medico', 3),
+(5, 'asdf', 'asdf', 'Pepe', 'caca', 2),
+(6, '23/2/23', '34/24/121', 'ies la salle', 'la calle de la vida', 2);
 
 -- --------------------------------------------------------
 
@@ -65,17 +74,6 @@ CREATE TABLE `mail` (
   `message` text NOT NULL,
   `FK_id_usr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `mail`
---
-
-INSERT INTO `mail` (`id`, `correo`, `name`, `message`, `FK_id_usr`) VALUES
-(5, 'admin@admin.com', 'Admin Administrador', 'Esto es un puto mensaje de mierda\\n Su telefono es: 3859035803983048456', 6),
-(6, 'admin@admin.com', 'Admin Administrador', 'Esto es un puto mensaje de mierda\\n Su telefono es: 3859035803983048456', 6),
-(7, 'lmgspain@hotmail.com', 'Luis Martinez', 'Este mensaje es una prueba de envio al administrador del sitio web\\n Su telefono es: 677654386', 6),
-(8, 'cristiansmx2a@gmail.com', 'Cristian Diaz', 'asdfasdf\\n Su telefono es: 23452345', 6),
-(11, 'perico@lokillo.com', 'Perico', 'Esto es el mensaje de un payés\\n Su telefono es: 613', 6);
 
 -- --------------------------------------------------------
 
@@ -115,18 +113,19 @@ CREATE TABLE `usr` (
   `surname` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `FK_id_prof` int(11) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
-  `pic` varchar(150) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'default.jpg'
+  `pic` varchar(150) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'default.jpg',
+  `presentacion` text COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `usr`
 --
 
-INSERT INTO `usr` (`id_usr`, `mail`, `pass`, `name`, `surname`, `FK_id_prof`, `admin`, `pic`) VALUES
-(2, 'lmgspain@hotmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Luisa come pollas', 'Martinez', 1, 0, 'default.jpg'),
-(3, 'cristiansmx2a@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Cristian', 'Diaz', 1, 0, 'default.jpg'),
-(4, 'rosamari@hotmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Rouse', 'Mari', 0, 0, 'default.jpg'),
-(6, 'admin@admin.com', '1a1dc91c907325c69271ddf0c944bc72', 'Admin', 'Administrador', 0, 1, 'default.jpg');
+INSERT INTO `usr` (`id_usr`, `mail`, `pass`, `name`, `surname`, `FK_id_prof`, `admin`, `pic`, `presentacion`) VALUES
+(2, 'lmgspain@hotmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Luis', 'Martinez', 1, 0, 'default.jpg', ''),
+(3, 'cristiansmx2a@gmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Cristian', 'Diaz', 1, 0, 'default.jpg', ''),
+(4, 'rosamari@hotmail.com', '1a1dc91c907325c69271ddf0c944bc72', 'Rouse', 'Mari', 2, 0, 'default.jpg', ''),
+(6, 'admin@admin.com', '1a1dc91c907325c69271ddf0c944bc72', 'Admin', 'Administrador', 0, 1, 'default.jpg', '');
 
 --
 -- Índices para tablas volcadas
@@ -174,17 +173,17 @@ ALTER TABLE `usr`
 -- AUTO_INCREMENT de la tabla `experiencias`
 --
 ALTER TABLE `experiencias`
-  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `formacion`
 --
 ALTER TABLE `formacion`
-  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `mail`
 --
 ALTER TABLE `mail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `profesion`
 --
