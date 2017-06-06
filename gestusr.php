@@ -59,7 +59,7 @@ session_start();
            <form action="" method="POST" >
                 <div class="form-group pull-left">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="button" id="defpass" class="btn btn-success">Reiniciar Pollas</button>
+                      <button type="button" id="defpass" class="btn btn-success">Reiniciar Contraseña</button>
                     </div>
                 </div>
            </form>

@@ -488,9 +488,9 @@ function mostrarcv(){
 					<p class="text-right"><?= $value->getprofesion();?></p>
 					<p class="descripcion"><?= substr($value->getpresentacion(),0,150)."..."?></p>
 					<ul class="list-inline list-unstyled">
-						<li><span><i class=""></i>Formaciones: $num </span></li>
+						<li><span><i class=""></i>Formaciones: <?= $value->getformacion();?> </span></li>
 						<li>|</li>
-						<span><i class=""></i> Experiencias: $num</span>
+						<span><i class=""></i> Experiencias: <?= $value->getexperiencias();?></span>
 					
 						<li>
 						<!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->

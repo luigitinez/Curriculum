@@ -157,7 +157,7 @@ function profesiones(){
 function listar(){
 
     $conn = conectar();
-    $select = "SELECT `id_usr`, `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion`, FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
+    $select = "SELECT `id_usr`, `mail`,`name`,`surname`,`admin`,`pic`, `nombre_profesion` FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof";
      $result = $conn->query($select);
     if ($result->num_rows > 0) {
         $profesiones=array();
@@ -333,12 +333,19 @@ function deleteprof($id){
 }
 function makecvs(){
     $conn  = conectar();
-    $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic`,`presentacion` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
+    $groupby = 'GROUP BY (id_usr)';
+    $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic`,`presentacion`, COUNT(DISTINCT experiencias.id_exp) as laboral, COUNT(DISTINCT formacion.id_exp) as formacion
+FROM `usr` INNER JOIN `profesion` as prof ON usr.FK_id_prof = prof.id_prof 
+LEFT JOIN `experiencias` ON usr.id_usr = experiencias.FK_id_usr
+LEFT JOIN `formacion` ON usr.id_usr = formacion.FK_id_usr
+WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0 ';
     if(isset($_SESSION['cvprof'])){
-        $sql.= ' AND `FK_id_prof` ='. $_SESSION['cvprof'];
+        $sql.= ' AND `FK_id_prof` ='. $_SESSION['cvprof'].' ';
         unset($_SESSION['cvprof']);
         //die($sql);
     }
+    $sql.=$groupby;
+    //die($sql);
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // recorremos la consulta
@@ -352,8 +359,8 @@ function makecvs(){
             $cvs[$i]->setsurname($row["surname"]);
             $cvs[$i]->setprofesion($row["nombre_profesion"]);
             $cvs[$i]->setpresentacion($row["presentacion"]);
-            //$cvs[$i]->setformacion($row["formacion"]);
-            //$cvs[$i]->setexperiencias($row["experiencias"]);
+            $cvs[$i]->setformacion($row["formacion"]);
+            $cvs[$i]->setexperiencias($row["laboral"]);
            
             $i++;
         }
