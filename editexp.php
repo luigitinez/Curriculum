@@ -2,6 +2,7 @@
 include_once "php/common.php";
 include_once "php/functions.php";
 session_start();
+backunlogged();
 ?>
 <!DOCTYPE html>
 <html>

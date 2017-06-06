@@ -64,7 +64,7 @@ function usrexists ($mail){
 function usrconsult ($id){
     $enlace = conectar();
     //generamos una consulta para enviar a la bbdd
-  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion`
+  $query = "SELECT `id_usr`, `mail`, `pass`,`name`,`surname`,`admin`,`pic`,`FK_id_prof`, `nombre_profesion`,`presentacion`
    FROM `usr` INNER JOIN `profesion` WHERE usr.FK_id_prof = profesion.id_prof AND usr.id_usr = '".$id."'";
   if(!$result =$enlace->query($query)){
    //la consulta no se ha realizado con exito
@@ -333,7 +333,7 @@ function deleteprof($id){
 }
 function makecvs(){
     $conn  = conectar();
-    $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
+    $sql   = 'SELECT `id_usr`, `name`,`surname`,prof.nombre_profesion, `pic`,`presentacion` FROM `usr` INNER JOIN `profesion` AS prof WHERE prof.id_prof = usr.FK_id_prof AND NOT `FK_id_prof` = 0';
     if(isset($_SESSION['cvprof'])){
         $sql.= ' AND `FK_id_prof` ='. $_SESSION['cvprof'];
         unset($_SESSION['cvprof']);
@@ -351,6 +351,7 @@ function makecvs(){
             $cvs[$i]->setname($row["name"]);
             $cvs[$i]->setsurname($row["surname"]);
             $cvs[$i]->setprofesion($row["nombre_profesion"]);
+            $cvs[$i]->setpresentacion($row["presentacion"]);
             //$cvs[$i]->setformacion($row["formacion"]);
             //$cvs[$i]->setexperiencias($row["experiencias"]);
            

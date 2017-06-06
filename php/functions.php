@@ -486,10 +486,7 @@ function mostrarcv(){
 					<div class="media-body">
 						<h4 class="media-heading"><?= $value->getname() . " " . $value->getsurname(); ?></h4>
 					<p class="text-right"><?= $value->getprofesion();?></p>
-					<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-			Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis 
-			dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-			Aliquam in felis sit amet augue.</p>
+					<p class="descripcion"><?= substr($value->getpresentacion(),0,150)."..."?></p>
 					<ul class="list-inline list-unstyled">
 						<li><span><i class=""></i>Formaciones: $num </span></li>
 						<li>|</li>

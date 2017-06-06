@@ -14,6 +14,7 @@ class cv{
     public $profesion;
     public $formacion;
     public $experiencias;
+    public $presentacion;
    
 
     //GETTERS
@@ -39,6 +40,9 @@ class cv{
     function getexperiencias(){
         return $this -> experiencias;
     }
+    function getpresentacion(){
+        return $this -> presentacion;
+    }
 
     //SETTERS
     function setname($name){
@@ -62,6 +66,8 @@ class cv{
     function setexperiencia($experiencias){
         $this -> experiencias = $experiencias;
     }
-
+    function setpresentacion($presentacion){
+        $this -> presentacion = $presentacion;
+    }
 }
 ?>

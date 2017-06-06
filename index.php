@@ -1,5 +1,6 @@
 <?php 
 include_once "php/common.php";
+include_once "php/functions.php";
 session_start();
 ?>
 <!DOCTYPE html>
@@ -14,9 +15,16 @@ session_start();
 
 <center>
 <div class="container">
-<h1>Bienvenido a <i>Curriculum</i></h1>
-	<?php mostrarcv();?>
-</div>
+	<div class="form-group pull-right">
+		<form action="php/selectcv.php" method="POST">
+			<?php makeselect('index');?>
+		</form>
+	</div>
+	<h1>Bienvenido a <i>Curriculum</i></h1>
+	
+	<div>
+		<?php mostrarcv();?>
+	</div>
 
 </center>
 </body>
