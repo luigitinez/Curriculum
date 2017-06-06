@@ -63,7 +63,7 @@ class cv{
     function setformacion($formacion){
         $this -> formacion = $formacion;
     }
-    function setexperiencia($experiencias){
+    function setexperiencias($experiencias){
         $this -> experiencias = $experiencias;
     }
     function setpresentacion($presentacion){
