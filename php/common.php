@@ -59,15 +59,11 @@ function menu(){
 
       <?php endforeach;?>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Más <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">¿Quienes Somos?</a></li>
-            <li><a href="#">Terminos y Condiciones</a></li>
-            <li><a href="#">¿Porque Curriculum?</a></li>
+            <li><a href="#">¿Como funciona?</a></li>
             <li class="divider"></li>
             <li><a href="cookies.php">Politica Cookies</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
       </ul>
@@ -206,7 +202,7 @@ checkCookie();
 
                     <a href="#" onclick="cerrar()" class="btn btn-primary pull-right">Close</a>
                     <p class="text-muted credit">
-                      Usando nuestro sitio web usted nos consiente el uso de cookies de acuerdo con nuestra <a href="/cookies">politica de cookies</a>.
+                      Usando nuestro sitio web usted nos consiente el uso de cookies de acuerdo con nuestra <a href="/cookies.php">politica de cookies</a>.
                     </p>
                     <br>
 
