@@ -61,7 +61,7 @@ function menu(){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Más <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">¿Como funciona?</a></li>
+            <li><a href="https://youtu.be/DF3uWZ4BGhQ">¿Como funciona?</a></li>
             <li class="divider"></li>
             <li><a href="cookies.php">Politica Cookies</a></li>
           </ul>
