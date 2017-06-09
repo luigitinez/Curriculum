@@ -461,7 +461,7 @@ function sendUsrMail($id,$mailSender,$name,$message){
 	mail($mailSender,"cvproject confirmacion envio","Le informamos que su mensaje ha sido enviado con éxito",$from,$headers);
 	//mensaje para el destnatario final
 	mail($mail,"Mensaje desde CVProject",$message,$from,$headers);
-	$result=insertMail($name, $mail, $message, $id);
+	$result=insertMail($name, $mailSender, $message, $id);
 	return $result;
 }
 function sendAdminMail(){
