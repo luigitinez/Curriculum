@@ -1,13 +1,16 @@
 <?php
 include_once "functions.php";
 include_once "MySQLDataSource.php";
+session_start();
+$_SESSION['post']=$_POST;
+
 if(isset($_POST['forma'])){//añadir formacion
     if(!empty($_POST['lugar']) && !empty($_POST['prof']) && !empty($_POST['ini']) && !empty($_POST['fin'])){
 
         $result = addformex("formacion",$_POST['lugar'],$_POST['prof'],$_POST['ini'],$_POST['fin'],$_POST['user']);
         turnback("add=".$result);
 
-    }else{
+    }else{  
         turnback("empty=true");
     }
 }elseif (isset($_POST['expe'])) {//añadir experiencia

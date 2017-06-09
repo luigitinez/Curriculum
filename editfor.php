@@ -2,20 +2,22 @@
 include_once "php/common.php";
 include_once "php/functions.php";
 session_start();
+backunlogged();
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Formacion</title>
 	<?php styles();?>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+
 </head>
 <body>
  <script>
   $( function() {
     $( ".datepicker" ).datepicker({
-			 dateFormat: "yy-mm-dd";
+			 dateFormat: "yy-mm-dd"
 	});
   } );
   </script>
@@ -31,28 +33,32 @@ session_start();
 	</div>
 <?php
 	}
+
 ?>
 	<center><h2>Formación</h2></center>
 	<form action="php/editformex.php" method="POST">
 		<legend>Añadir Formación</legend>
 		<div class="form-group">
 				<label>Centro Formativo</label>
-				<input type="text" class="form-control" name="lugar" maxlength="100" placeholder="Lugar Formación">
+				<input type="text" class="form-control" name="lugar" maxlength="100" placeholder="Lugar Formación" value="<?if(isset($_SESSION['post']['lugar'])){ echo $_SESSION['post']['lugar'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Tipo de Estudios Cursados</label>
-				<input type="text" class="form-control" name="prof" maxlength="100" placeholder="Estudios Cursados">
+				<input type="text" class="form-control" name="prof" maxlength="100" placeholder="Estudios Cursados" value="<?if(isset($_SESSION['post']['prof'])){ echo $_SESSION['post']['prof'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Fecha de inicio de la Formación</label>
-				<input type="text" class="form-control datepicker" name="ini" placeholder='Fecha Inicio' data-provide="datepicker">
+				<input type="text" class="form-control datepicker" name="ini" placeholder='Fecha Inicio' data-provide="datepicker" value="<?if(isset($_SESSION['post']['ini'])){ echo $_SESSION['post']['ini'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Fecha de finalización de la Formación</label>				
-				<input type="text" class="form-control datepicker" name="fin" placeholder='Fecha Fin'>
+				<input type="text" class="form-control datepicker" name="fin" placeholder='Fecha Fin' value="<?if(isset($_SESSION['post']['fin'])){ echo $_SESSION['post']['fin'];}?>">
 		</div>
 		<div class="form-group">
-				<?php hiddenusr(); ?>
+<?php 		
+			hiddenusr(); 
+			unset($_SESSION['post']);
+?>
 		</div>
 		<div class="form-group">
 				<input type="submit" name="forma" class="btn btn-primary pull-right" value="Añadir Formacion">
