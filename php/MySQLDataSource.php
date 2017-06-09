@@ -113,6 +113,7 @@ function addformex($table,$place,$prof,$ini,$end,$id){
     }
     $sqlins="INSERT INTO `".$table."`( `lugar`, `".$tipo."`, `fecha_ini`, `fecha_fin`, `FK_id_usr`) 
     VALUES ('".$place."','".$prof."','".$ini."','".$end."','".$id."')";
+
     $mysqli=conectar();
     if ($resultado = $mysqli->query($sqlins)) {//todo fue bien
         $mysqli->close();

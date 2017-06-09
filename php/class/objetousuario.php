@@ -13,10 +13,10 @@ class usuario{
     private $idprof;//el id de la profesion
     private $pic;//url foto
     private $name;
+    private $karma;//administrador o no
     private $surname;
     private $presentacion;
-//no se añade descripcion porque seria muy pesado si hay que 
-//manejar múltiples objetos a la vez y es innecesaria
+
     //GETTERS
 
     function getmail(){

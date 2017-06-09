@@ -173,7 +173,7 @@ function mostrarformaciones($id=""){
 ?>
 				<tr class="">
 					<td><?= $value->getinit_date() ?></td>
-					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getend_date() ?></td>
 					<td><?= $value->getplace() ?> </td>
 					<td><?= $value->getjob() ?> </td>
 <?php 			if(empty($id)) {?>
@@ -209,7 +209,7 @@ function mostrarexperiencias($id=""){
 ?>
 				<tr class="">
 					<td><?= $value->getinit_date() ?></td>
-					<td><?= $value->getinit_date() ?></td>
+					<td><?= $value->getend_date() ?></td>
 					<td><?= $value->getplace() ?> </td>
 					<td><?= $value->getjob() ?> </td>
 <?php 			if(empty($id)){ ?>

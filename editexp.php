@@ -38,19 +38,19 @@ backunlogged();
 		<legend>Añadir Experiencia Laboral</legend>
 		<div class="form-group">
 				<label>Centro de Trabajo</label>
-				<input type="text" class="form-control" name="lugar" maxlength="100">
+				<input type="text" class="form-control" name="lugar" maxlength="100" value="<?if(isset($_SESSION['post'])){ echo $_SESSION['post']['lugar'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Profesion Ejercida</label>
-				<input type="text" class="form-control" name="prof" maxlength="100">
+				<input type="text" class="form-control" name="prof" maxlength="100" value="<?if(isset($_SESSION['post'])){ echo $_SESSION['post']['prof'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Fecha de inicio</label>
-				<input type="text" class="form-control datepicker" name="ini" data-provide="datepicker">
+				<input type="text" class="form-control datepicker" name="ini" data-provide="datepicker" value="<?if(isset($_SESSION['post'])){ echo $_SESSION['post']['ini'];}?>">
 		</div>
 		<div class="form-group">
 				<label>Fecha de finalización</label>				
-				<input type="text" class="form-control datepicker" name="fin" data-provide="datebicker">
+				<input type="text" class="form-control datepicker" name="fin" data-provide="datebicker" value="<?if(isset($_SESSION['post'])){ echo $_SESSION['post']['lugar'];}?>">
 		</div>
 		<div class="form-group">
 				<?php hiddenusr(); ?>
